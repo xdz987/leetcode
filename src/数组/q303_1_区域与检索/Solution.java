@@ -1,7 +1,4 @@
-package 数组.q303_区域与检索;
-
-import java.io.InputStream;
-import java.util.Scanner;
+package 数组.q303_1_区域与检索;
 
 public class Solution {
     public static void main(String[] args) {

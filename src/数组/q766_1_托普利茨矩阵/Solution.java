@@ -1,4 +1,4 @@
-package 数组.q766_托普利茨矩阵;
+package 数组.q766_1_托普利茨矩阵;
 
 import java.util.Arrays;
 

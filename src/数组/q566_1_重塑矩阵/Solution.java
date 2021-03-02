@@ -1,4 +1,4 @@
-package 数组.q566_重塑矩阵;
+package 数组.q566_1_重塑矩阵;
 
 import java.util.Arrays;
 
@@ -17,6 +17,9 @@ public class Solution {
     }
 }
 
+/**
+ * 判断重塑目标矩阵面积是否等于原矩阵，如相等则根据目标矩阵宽长 重塑为新矩阵
+ */
 class MatrixReshape {
     public int[][] matrixReshape(int[][] nums, int r, int c) {
         //(1)判断r,c是否可重塑为新矩阵
