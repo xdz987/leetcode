@@ -1,6 +1,4 @@
-package 数组.q_287_2_寻找重复数;
-
-import java.util.Arrays;
+package 数组.q287_2_寻找重复数;
 
 public class Solution {
     public static void main(String[] args) {
