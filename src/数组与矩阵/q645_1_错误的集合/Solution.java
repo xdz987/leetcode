@@ -1,4 +1,4 @@
-package 数组.q645_1_错误的集合;
+package 数组与矩阵.q645_1_错误的集合;
 
 import java.util.Arrays;
 

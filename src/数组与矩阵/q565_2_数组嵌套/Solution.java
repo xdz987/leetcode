@@ -1,4 +1,4 @@
-package 数组.q565_2_数组嵌套;
+package 数组与矩阵.q565_2_数组嵌套;
 
 public class Solution {
     public static void main(String[] args) {

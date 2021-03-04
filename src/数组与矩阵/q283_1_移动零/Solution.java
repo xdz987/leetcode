@@ -1,4 +1,4 @@
-package 数组.q283_1_移动零;
+package 数组与矩阵.q283_1_移动零;
 
 import java.util.Arrays;
 

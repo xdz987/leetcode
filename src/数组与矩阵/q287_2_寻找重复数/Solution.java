@@ -1,4 +1,4 @@
-package 数组.q287_2_寻找重复数;
+package 数组与矩阵.q287_2_寻找重复数;
 
 public class Solution {
     public static void main(String[] args) {
@@ -41,7 +41,7 @@ class FindDuplicate {
 
         //(2)二分查找
         while (left < right) {
-            mid = (left + right) >>> 1;
+            mid = left + ((left - right) >>> 1);
             count = 0;
             for (int num : nums) {
                 if (num <= mid) {

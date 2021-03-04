@@ -1,4 +1,4 @@
-package 数组.q667_2_数组相差值的个数;
+package 数组与矩阵.q667_2_数组相差值的个数;
 
 import java.util.Arrays;
 

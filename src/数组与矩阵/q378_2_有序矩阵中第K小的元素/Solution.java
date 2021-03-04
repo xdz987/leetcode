@@ -1,4 +1,4 @@
-package 数组.q378_2_有序矩阵中第K小的元素;
+package 数组与矩阵.q378_2_有序矩阵中第K小的元素;
 
 public class Solution {
     public static void main(String[] args) {
@@ -11,7 +11,7 @@ public class Solution {
 }
 
 /**
- * 升序矩阵行列升序的性质 二分查找
+ * 升序矩阵行列升序的性质 左侧边界二分查找
  */
 class KthSmallest {
 

@@ -1,4 +1,4 @@
-package 数组.q566_1_重塑矩阵;
+package 数组与矩阵.q566_1_重塑矩阵;
 
 import java.util.Arrays;
 

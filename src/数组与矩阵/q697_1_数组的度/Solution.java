@@ -1,4 +1,4 @@
-package 数组.q697_1_数组的度;
+package 数组与矩阵.q697_1_数组的度;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package 数组.q485_1_最大连续1的个数;
+package 数组与矩阵.q485_1_最大连续1的个数;
 
 public class Solution {
     public static void main(String[] args) {
