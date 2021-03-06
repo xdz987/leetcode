@@ -2,7 +2,7 @@ package 二分查找.q153_2_旋转数组查最小值;
 
 public class Solution {
     public static void main(String[] args) {
-        int[] nums = new int[]{4,5,6,7,0,1,2};
+        int[] nums = new int[]{4, 5, 6, 7, 0, 1, 2};
         FindMin findMin = new FindMin();
         System.out.println(findMin.findMin(nums));
     }
@@ -16,7 +16,7 @@ class FindMin {
     public int findMin(int[] nums) {
         //(1)初始化边界等
         int left = 0;
-        int right = nums.length;
+        int right = nums.length - 1;
         int mid = 0;
 
         //(2)左侧边界二分查找 两种边界
@@ -36,7 +36,6 @@ class FindMin {
                 left = mid + 1;
             }
         }
-
         //到此说明数组只有一个元素
         return nums[0];
     }
