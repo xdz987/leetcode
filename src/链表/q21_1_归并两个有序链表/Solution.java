@@ -16,6 +16,7 @@ public class Solution {
  * 1.创建一个新node作保存
  * 2.循环遍历l1和l2，新node保存更小的那个，直到l1或l2为null
  * 3.将另一个不为null(剩下的都是大数)的连接到新node
+ * 迭代 > 递归
  */
 class MergeTwoLists {
     //递归实现

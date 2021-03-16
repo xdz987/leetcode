@@ -9,8 +9,8 @@ public class Solution {
         head.next.next = new ListNode(3);
         head.next.next.next = new ListNode(4);
         head.next.next.next.next = new ListNode(5);
-        ItReverseBetween2 itReverseBetween = new ItReverseBetween2();
-        head = itReverseBetween.reverseBetween(head, 2, 4);
+        ReReverseBetween itReverseBetween = new ReReverseBetween();
+        head = itReverseBetween.reverseBetween(head, 1, 4);
         while (head != null) {
             System.out.println(head.val);
             head = head.next;
@@ -40,7 +40,6 @@ class ReReverseBetween {
 
     //递归实现-执行函数
     ListNode successor = null; //后继节点
-
     public ListNode reverseN(ListNode head, int n) {
         if (n == 1) {
             //记录第n+1节点
@@ -120,6 +119,7 @@ class ItReverseBetween1 {
 
 /**
  * 定位头插法 O(n)
+ * 定位到left，之和不断头插节点
  */
 class ItReverseBetween2 {
 
