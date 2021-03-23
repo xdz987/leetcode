@@ -1,4 +1,4 @@
-package 二叉树.q110_1_平衡二叉树;
+package 二叉树.剑55q110_1_平衡二叉树;
 
 import 二叉树.TreeNode;
 

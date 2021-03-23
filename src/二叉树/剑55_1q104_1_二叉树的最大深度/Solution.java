@@ -1,9 +1,6 @@
-package 二叉树.q104_1_二叉树的最大深度;
+package 二叉树.剑55_1q104_1_二叉树的最大深度;
 
 import 二叉树.TreeNode;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Solution {
     public static void main(String[] args) {

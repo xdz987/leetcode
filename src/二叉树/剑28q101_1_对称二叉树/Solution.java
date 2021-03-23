@@ -1,6 +1,5 @@
-package 二叉树.q101_1_对称二叉树;
+package 二叉树.剑28q101_1_对称二叉树;
 
-import org.w3c.dom.Node;
 import 二叉树.TreeNode;
 
 public class Solution {
