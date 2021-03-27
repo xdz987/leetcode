@@ -1,4 +1,4 @@
-package 树.二叉树.q437_2_路径总和3;
+package 树.二叉树.面0412q437_2_路径总和3;
 
 import 树.二叉树.TreeNode;
 
@@ -18,25 +18,23 @@ public class Solution {
  * 后序：删除本子树下的节点前缀和，以防止影响到其他子树
  */
 class PathSum {
-
     //前缀和，次数
     Map<Integer, Integer> container = new HashMap<>();
+    //符合target的数量res
+    int res = 0;
 
     public int pathSum(TreeNode root, int sum) {
         //存在某个节点直接等于sum，此时需要前缀和为0作补充
         container.put(0, 1);
-
+        preSum(root, sum, 0);
         //currentSum前缀和初始值
-        return preSum(root, sum, 0);
+        return res;
     }
 
-    private int preSum(TreeNode root, int target, int currentSum) {
+    private void preSum(TreeNode root, int target, int currentSum) {
         if (root == null) {
-            return 0;
+            return;
         }
-        //符合target的数量res
-        int res = 0;
-
         //前缀和累计计算
         currentSum += root.val;
         //查找是否存在满足target
@@ -47,12 +45,10 @@ class PathSum {
         container.put(currentSum, container.getOrDefault(currentSum, 0) + 1);
 
         //递归查找路径
-        res += preSum(root.left, target, currentSum);
-        res += preSum(root.right, target, currentSum);
+        preSum(root.left, target, currentSum);
+        preSum(root.right, target, currentSum);
 
         //清除前缀和容器，避免影响其他子树
-        container.put(currentSum, container.getOrDefault(currentSum, 0) - 1);
-
-        return res;
+        container.put(currentSum, container.get(currentSum) - 1);
     }
 }

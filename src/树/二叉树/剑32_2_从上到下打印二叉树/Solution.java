@@ -14,7 +14,7 @@ public class Solution {
 }
 
 /**
- * 同剑32，只是不分层，更坚定
+ * 同剑32，只是不分层，更简单
  */
 class LevelOrder {
     public int[] levelOrder(TreeNode root) {

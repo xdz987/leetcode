@@ -11,7 +11,7 @@ public class Solution {
     }
 }
 
-public class Codec {
+class Codec {
 
     //使用队列层序遍历，然后转换为字符串格式。需要注意的最底层叶节点的null不影响反序列化，所以不需要处理
     public String serialize(TreeNode root) {

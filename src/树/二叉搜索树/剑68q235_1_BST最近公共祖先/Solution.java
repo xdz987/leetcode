@@ -1,4 +1,4 @@
-package 树.二叉搜索树.q235_1_BST最近公共祖先;
+package 树.二叉搜索树.剑68q235_1_BST最近公共祖先;
 
 import 树.二叉搜索树.TreeNode;
 

@@ -1,4 +1,4 @@
-package 树.二叉搜索树.q98_2_BST验证;
+package 树.二叉搜索树.面0405q98_2_BST验证;
 
 import 树.二叉搜索树.TreeNode;
 

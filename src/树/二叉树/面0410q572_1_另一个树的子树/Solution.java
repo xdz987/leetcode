@@ -1,4 +1,4 @@
-package 树.二叉树.q572_1_另一个树的子树;
+package 树.二叉树.面0410q572_1_另一个树的子树;
 
 import 树.二叉树.TreeNode;
 
