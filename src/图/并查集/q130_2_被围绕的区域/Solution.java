@@ -69,21 +69,15 @@ public class Solution {
         UF uf = new UF(n * m + 1);
         //虚拟祖先
         int dummy = n * m;
-        //将区域首列与尾列的'O'联通dummy
+        //将边界的O联通虚拟祖先
         for (int i = 0; i < m; i++) {
-            if (board[i][0] == 'O')
-                //第i行第一个
-                uf.union(i * n, dummy);
-            if (board[i][n - 1] == 'O')
-                //第i行第n-1个(即最后一个)
-                uf.union(i * n + n - 1, dummy);
-        }
-        //将区域首行与尾行的'O'联通dummy
-        for (int i = 0; i < n; i++) {
-            if (board[0][i] == 'O')
-                uf.union(i, dummy);
-            if (board[m - 1][i] == 'O')
-                uf.union(n * (m - 1) + i, dummy);
+            for (int j = 0; j < n; j++) {
+                if (i == 0 || j == 0 || i == m - 1 || j == n - 1) {
+                    if (board[i][j] == 'O') {
+                        uf.union(dummy, i * n + j);
+                    }
+                }
+            }
         }
 
         //初始化方向控制数组
@@ -105,7 +99,7 @@ public class Solution {
         //所有不与dummy联通的O，都要被替换
         for (int i = 1; i < m - 1; i++) {
             for (int j = 1; j < n - 1; j++) {
-                if (!uf.connected(i * n + j, dummy))
+                if (board[i][j] == 'O' && !uf.connected(i * n + j, dummy))
                     board[i][j] = 'X';
             }
         }
