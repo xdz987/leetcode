@@ -1,4 +1,4 @@
-package 树.前缀树.q208_2_实现Trie;
+package 树.字典树.q208_2_实现Trie;
 
 class Trie {
 

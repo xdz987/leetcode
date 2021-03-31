@@ -1,4 +1,4 @@
-package 树.前缀树;
+package 树.字典树;
 
 public class test {
     public static void main(String[] args) {
