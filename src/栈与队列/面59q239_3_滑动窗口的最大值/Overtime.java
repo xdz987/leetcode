@@ -1,4 +1,4 @@
-package 数组与矩阵.队列.q239_3_滑动窗口最大值;
+package 栈与队列.面59q239_3_滑动窗口的最大值;
 
 import java.util.Arrays;
 

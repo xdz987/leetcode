@@ -1,4 +1,4 @@
-package 栈与队列.q232_1_用栈实现队列;
+package 栈与队列.剑09q232_1_用栈实现队列;
 
 import java.util.Stack;
 
