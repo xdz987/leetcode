@@ -1,4 +1,4 @@
-package 数组与矩阵.二分查找.q154_3_可重复旋转数组查最小值;
+package 数组与矩阵.二分查找.剑11q154_3_可重复旋转数组查最小值;
 
 public class Solution {
     public static void main(String[] args) {

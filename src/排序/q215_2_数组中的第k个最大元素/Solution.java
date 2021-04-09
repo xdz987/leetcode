@@ -1,24 +1,12 @@
-package 排序.q215数组中的第k个最大元素;
-
-import java.util.Arrays;
-
-public class Solution {
-    public static void main(String[] args) {
-        int[] nums = new int[]{3, 2, 1, 5, 6, 4};
-        FindKthLargest findKthLargest = new FindKthLargest();
-        int res = findKthLargest.findKthLargest(nums, 2);
-        System.out.println(res);
-    }
-}
-
+package 排序.q215_2_数组中的第k个最大元素;
 /**
- * 随机快速排序等
- * 升序排序后返回k-1的值
+ * 方法一：随机快速排序
  */
-class FindKthLargest {
+class Solution {
     public int findKthLargest(int[] nums, int k) {
+        //(1)随机快排
         sort(nums, 0, nums.length - 1);
-
+        //(2)下标从0开始则-1
         return nums[k - 1];
     }
 
