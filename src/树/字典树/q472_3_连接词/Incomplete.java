@@ -104,6 +104,7 @@ class Incomplete {
             if (wordIndexList.isEmpty()) return false;
             int len = wordIndexList.size();
             /* 暂时搁这，因为可能要用到回溯或者动态规划，待学完回来补 */
+            /* 回来了，可用回溯、欧拉通路 */
             for (int i = 0; i < len; i++) {
                 System.out.println(Arrays.toString(wordIndexList.get(i)));
                 System.out.println("---------");
