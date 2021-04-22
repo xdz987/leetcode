@@ -24,7 +24,7 @@ public class Solution {
         //(3)拆分字符串并记录每个分段的终点
         int subStrStart = 0;
         int subStrMax = 0;
-        for (int i = 1; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             //(3.1)实现局部最优1。如起点字母的开始和终点包含字母为更大最后位置，则更大字母最后位置为准
             subStrMax = Math.max(subStrMax, intMap[SArr[i] - 'a']);
             //(3.2)实现局部最优2。达到终点，立即分割
