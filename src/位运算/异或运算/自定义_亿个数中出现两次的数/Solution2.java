@@ -18,21 +18,18 @@ public class Solution2 {
         PriorityQueue<Integer> fixHeap = new PriorityQueue<>();
         int K = 3;
         int n = nums.length;
-        int mode = Integer.MIN_VALUE;
         int last = Integer.MIN_VALUE;
         for (int i = 0; i < n; i++) {
             if (fixHeap.size() == K) {
                 last = fixHeap.poll();
                 fixHeap.offer(nums[i]);
                 if (last == fixHeap.peek()) {
-                    mode = last;
+                    return last;
                 }
             } else {
                 fixHeap.offer(nums[i]);
             }
         }
-        if (mode != Integer.MIN_VALUE)
-            return mode;
 
         while (fixHeap.size() != 0) {
             if (last == fixHeap.peek()) {
