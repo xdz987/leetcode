@@ -1,4 +1,4 @@
-package 动态规划._01背包问题;
+package 动态规划.背包问题._01背包._01背包原型;
 
 import java.util.Arrays;
 
@@ -18,10 +18,9 @@ public class Solution {
         int[][] dp = new int[N + 1][W + 1];
         for (int goods = 1; goods <= N; goods++) {
             for (int weight = 1; weight <= W; weight++) {
-                if (weight - wt[goods - 1] < 0) {
-                    dp[goods][weight] = dp[goods - 1][weight];
-                } else {
-                    dp[goods][weight] = Math.max(dp[goods - 1][weight - wt[goods - 1]] + val[goods - 1], dp[goods - 1][weight]);
+                int surplusW = weight - wt[goods - 1];
+                if (surplusW >= 0) {
+                    dp[goods][weight] = Math.max(dp[goods - 1][surplusW] + val[goods - 1], dp[goods - 1][weight]);
                 }
             }
         }
@@ -61,7 +60,7 @@ public class Solution {
     public static int maxValue3(int N, int W, int[] wt, int[] val) {
         int[] dp = new int[W + 1];
         for (int goods = 0; goods < N; goods++) {
-            for (int weight = W; weight >= 0; weight--) {
+            for (int weight = W; weight >= 1; weight--) {
                 if (weight - wt[goods] >= 0) {
                     dp[weight] = Math.max(dp[weight - wt[goods]] + val[goods], dp[weight]);
                 }
