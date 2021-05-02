@@ -1,7 +1,7 @@
 package 动态规划.背包问题.完全背包.q322_2_零钱兑换;
 
 /**
- * 方法二：DP(性能佳)
+ * 方法二：DP——完全背包最值
  * 方向自底向上
  * Java执行：90% 51%
  */
@@ -35,5 +35,19 @@ public class Solution2 {
 
         //(4)如amount等于初始值，说明在给定种类的硬币中无法组合成amount元。比如coin[2,3] amount=1,4...
         return dp[amount] == (amount + 1) ? -1 : dp[amount];
+    }
+
+    //遍历顺序与上面相反，上面是【排列】。下面先遍历硬币再遍历背包重量则是【组合】，但查最值时排列与组合不影响结果
+    public int coinChange2(int[] coins, int amount) {
+        int[] dp = new int[amount + 1];
+        dp[0] = 0;
+        for (int i=1;i<=amount;i++)
+            dp[i] = Integer.MAX_VALUE - 1;
+        for (int coin : coins) {
+            for (int amountt = coin; amountt <= amount; amountt++) {
+                dp[amountt] = Math.min(dp[amountt], dp[amountt - coin] + 1);
+            }
+        }
+        return dp[amount] == Integer.MAX_VALUE - 1 ? -1 : dp[amount];
     }
 }

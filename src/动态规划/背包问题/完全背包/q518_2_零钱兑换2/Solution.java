@@ -1,7 +1,7 @@
 package 动态规划.背包问题.完全背包.q518_2_零钱兑换2;
 
 /**
- * 方法一：DP[完全背包]
+ * 方法一：DP——完全背包组合问题
  */
 public class Solution {
     public int change(int amount, int[] coins) {
