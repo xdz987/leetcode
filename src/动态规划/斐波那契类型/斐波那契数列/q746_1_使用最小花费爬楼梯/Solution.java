@@ -1,4 +1,4 @@
-package 动态规划.斐波那契数列.q746_1_使用最小花费爬楼梯;
+package 动态规划.斐波那契类型.斐波那契数列.q746_1_使用最小花费爬楼梯;
 
 public class Solution {
     public int minCostClimbingStairs(int[] cost) {
