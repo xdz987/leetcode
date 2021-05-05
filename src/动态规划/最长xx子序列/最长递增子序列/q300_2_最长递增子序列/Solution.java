@@ -19,7 +19,8 @@ class Solution {
             //(3)遍历[0~i-1)，即遍历i之前的所有递增子序列数/状态选择列表
             for (int j = 0; j < i; j++) {
                 //(3.1)状态选择：取最大递增序列
-                if (nums[i] > nums[j]) dp[i] = Math.max(dp[i], dp[j] + 1);
+                if (nums[i] > nums[j])
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
             }
             //(4)动态保存截止至i的最大连续递增子序列
             res = Math.max(res, nums[i]);
