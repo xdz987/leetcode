@@ -3,7 +3,7 @@ package 数学.质数.q204_1_计数质数;
 /**
  * 方法一：埃氏法
  */
-class Solution {
+class Solution2 {
     public int countPrimes(int n) {
         //false是质数
         boolean[] isPrime = new boolean[n];
