@@ -29,7 +29,7 @@ class QuickSort {
         int pivot = left;
         int index = pivot + 1;
         for (int i = index; i <= right; i++) {
-            if (nums[pivot] > nums[i]) {
+            if (nums[pivot] < nums[i]) {
                 //将小于pivot的数，替换到pivot的右边
                 swap(nums, index, i);
                 index++;
