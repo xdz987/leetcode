@@ -1,4 +1,4 @@
-package 剑指offer补充.剑38_2_字符串的排列;
+package 回溯.排列.剑38_2_字符串的排列;
 
 import java.util.ArrayList;
 import java.util.HashSet;

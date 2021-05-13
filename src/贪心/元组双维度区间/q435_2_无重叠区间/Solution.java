@@ -6,6 +6,7 @@ import java.util.Arrays;
  * 放法一：贪心
  * Java：48% 28%
  * 局部最优：最少数量的去除重叠区间，去除end更大的重叠区间。如[1,2][1,3]，去除[1,3]可避免与[2,4]重叠
+ * [1,3][2,4][2,5][1,6]
  */
 class Solution {
     public int eraseOverlapIntervals(int[][] intervals) {

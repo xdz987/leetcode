@@ -16,4 +16,19 @@ class Solution {
         }
         return farthest >= nums.length - 1;
     }
+
+    //方式二：记录当前能够跳的步数
+    public boolean cnaJump2(int[] nums) {
+        if (nums.length == 0) return false;
+        if (nums.length > 1 && nums[0] == 0) return false;
+        int n = nums.length;
+        int pre = nums[0];
+        for (int i = 1; i < n - 1; i++) {
+            int cur = Math.max(nums[i], pre - 1);
+            if (cur == 0)
+                return false;
+            pre = cur;
+        }
+        return true;
+    }
 }
