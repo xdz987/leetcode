@@ -23,7 +23,7 @@ class Solution {
                     dp[i] = Math.max(dp[i], dp[j] + 1);
             }
             //(4)动态保存截止至i的最大连续递增子序列
-            res = Math.max(res, nums[i]);
+            res = Math.max(res, dp[i]);
         }
         return res;
     }
