@@ -26,4 +26,29 @@ class Solution2 {
         }
         return res;
     }
+
+    //自写版
+    public int countSubstrings2(String s) {
+        int n = s.length();
+        char[] sArr = s.toCharArray();
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            int left = i - 1;
+            int right = i + 1;
+            count++;
+            while (left >= 0 && right < n && sArr[left] == sArr[right]) {
+                count++;
+                left--;
+                right++;
+            }
+            left = i - 1;
+            right = i;
+            while (left >= 0 && right < n && sArr[left] == sArr[right]) {
+                count++;
+                left--;
+                right++;
+            }
+        }
+        return count;
+    }
 }

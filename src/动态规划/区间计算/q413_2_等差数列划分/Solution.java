@@ -33,4 +33,23 @@ class Solution {
         }
         return res;
     }
+
+    //优化版本：等差数列个数为，len-2+len-3...1，设立base变量模拟这个流程
+    public int numberOfArithmeticSlices2(int[] nums) {
+        int n = nums.length;
+        if (n < 3) return 0;
+        int res = 0;
+        int base = 1;
+        for (int i = 2; i < n; i++) {
+            int preDiff = nums[i - 1] - nums[i - 2];
+            int curDiff = nums[i] - nums[i - 1];
+            if (preDiff == curDiff) {
+                res += base;
+                base++;
+            } else {
+                base = 1;
+            }
+        }
+        return res;
+    }
 }

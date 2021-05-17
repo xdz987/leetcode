@@ -26,4 +26,32 @@ class Solution {
         }
         return s.substring(longestLeft, longestRight + 1);
     }
+
+    //自写版
+    public String longestPalindrome2(String s) {
+        int n = s.length();
+        char[] sArr = s.toCharArray();
+        String res = s.substring(0, 1);
+        for (int i = 0; i < n; i++) {
+            int left = i - 1;
+            int right = i + 1;
+            while (left >= 0 && right < n && sArr[left] == sArr[right]) {
+                if (right - left + 1 > res.length()) {
+                    res = s.substring(left, right + 1);
+                }
+                left--;
+                right++;
+            }
+            left = i - 1;
+            right = i;
+            while (left >= 0 && right < n && sArr[left] == sArr[right]) {
+                if (right - left + 1 > res.length()) {
+                    res = s.substring(left, right + 1);
+                }
+                left--;
+                right++;
+            }
+        }
+        return res;
+    }
 }
