@@ -21,4 +21,13 @@ class Solution {
         }
         return res;
     }
+
+    //DP解
+    public int[] countBits2(int num) {
+        int[] dp = new int[num+1];
+        for(int i=1;i<=num;i++){
+            dp[i] = dp[i&(i-1)]+1;
+        }
+        return dp;
+    }
 }

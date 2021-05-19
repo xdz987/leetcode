@@ -10,4 +10,14 @@ class Solution {
     public int getSum(int a, int b) {
         return b == 0 ? a : getSum(a ^ b, (a & b) << 1);
     }
+
+    //迭代版
+    public int getSum2(int a, int b) {
+        while(b!=0){
+            int tmp = a & b;
+            a^=b;
+            b=tmp<<1;
+        }
+        return a;
+    }
 }
