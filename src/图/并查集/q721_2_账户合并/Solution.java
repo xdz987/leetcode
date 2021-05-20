@@ -38,6 +38,7 @@ public class Solution {
             emails.add(entry.getKey());
             //覆盖，如：{email1}-->{email1,email2}
             idToEmails.put(id, emails);
+            new PriorityQueue<String>((a,b)->a.compareTo(b));
         }
 
         //将数据整理成最终格式
