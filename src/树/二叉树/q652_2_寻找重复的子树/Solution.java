@@ -28,7 +28,6 @@ class FindDuplicateSubtrees {
         return res;
     }
 
-
     private String traverse(TreeNode root) {
         if (root == null) {
             return "#";
