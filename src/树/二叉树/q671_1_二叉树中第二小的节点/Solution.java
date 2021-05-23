@@ -43,7 +43,7 @@ class FindSecondMinimumValue {
         int right = find(root.right, root.val);
 
         //(3.1)针对一边为叶子节点或全相等，另一边存在倒数第二小值
-        if (left == -1) {
+        if (left == -1) {   
             return right;
         }
         if (right == -1) {
