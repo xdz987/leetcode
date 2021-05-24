@@ -2,6 +2,7 @@ package 树.二叉搜索树.q95_2_不同的BST2;
 
 import 树.二叉搜索树.TreeNode;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,8 +20,9 @@ class Solution {
     }
 
     private List<TreeNode> build(int l, int r) {
-        List<TreeNode> res = new LinkedList<>();
-        if (l > r) {
+        List<TreeNode> res = new ArrayList<>();
+        //(1)构建树已到达叶节点
+        if (l > r){
             //单边树的情况
             res.add(null);
             return res;

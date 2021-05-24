@@ -21,7 +21,7 @@ public class Solution {
             // 情况3
             TreeNode min = getMin(root.right);
             root.val = min.val;
-            root.right = deleteNode(root, min.val);
+            root.right = deleteNode(root.right, min.val);
         } else if (root.val > key) {
             root.left = deleteNode(root.left, key);
         } else {
