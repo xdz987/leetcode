@@ -17,49 +17,44 @@ class MapSum {
     //插入word，word的最后一个字符存储val值
     public void insert(String key, int val) {
         TrieNode cur = root;
-        for (int i = 0; i < key.length(); i++) {
-            int cIndex = key.charAt(i) - 'a';
-            //不存在则新建节点
-            if (cur.children[cIndex] == null) {
-                TrieNode cNode = new TrieNode();
-                cur.children[cIndex] = cNode;
+        for(char c:key.toCharArray()){
+            if(cur.children[c-'a'] == null){
+                cur.children[c-'a'] = new TrieNode();
             }
-            cur = cur.children[cIndex];
+            cur = cur.children[c-'a'];
         }
         cur.val = val;
     }
 
     public int sum(String prefix) {
-        //(1)判断是否存在prefix开头的word
         TrieNode cur = root;
-        for (int i = 0; i < prefix.length(); i++) {
-            int cIndex = prefix.charAt(i) - 'a';
-            if (cur.children[cIndex] == null) {
+        for(int i=0;i<prefix.length();i++){
+            char c = prefix.charAt(i);
+            if(cur.children[c-'a'] == null){
                 return 0;
             }
-            cur = cur.children[cIndex];
+            cur = cur.children[c-'a'];
         }
-
-        //(2)dfs递归遍历所有以prefix为前缀的单词的val，并进行累加
-        //先加当前节点/字符的val
-        sum = cur.val;
-        dfs(cur);
-        return sum;
+        return fuzzySum(cur);
     }
 
     //深度遍历并累加cur下的所有字符的val
-    int sum;
-    private void dfs(TrieNode cur) {
-        for (int i = 0; i < 26; i++) {
-            if (cur.children[i] != null) {
-                sum += cur.children[i].val;
-                dfs(cur.children[i]);
+    private int fuzzySum(TrieNode cur){
+        int res = cur.val;
+        for(int i=0;i<26;i++){
+            if(cur.children[i]!=null){
+                res += fuzzySum(cur.children[i]);
             }
         }
+        return res;
     }
 
-    class TrieNode {
-        int val = 0;
-        TrieNode[] children = new TrieNode[26];
+    class TrieNode{
+        TrieNode[] children;
+        int val;
+        TrieNode(){
+            children = new TrieNode[26];
+            val = 0;
+        }
     }
 }

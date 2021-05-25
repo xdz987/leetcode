@@ -9,25 +9,22 @@ public class Solution {
     public String replaceWords(List<String> dictionary, String sentence) {
         //(1)将词根插入前缀树
         Trie trie = new Trie();
-        for (String pre : dictionary) {
-            trie.insert(pre);
+        for(String word:dictionary){
+            trie.insert(word);
         }
 
         //(2)将句子拆分为单词数组
-        String[] words = sentence.split(" ");
+        String[] sentenceArr = sentence.split(" ");
 
         //(3)查找每个单词是否存在词根替换，存在则替换
         StringBuilder res = new StringBuilder();
-        for (int i = 0; i < words.length; i++) {
-            String searchRes = trie.search(words[i]);
-            if (searchRes != "")
-                words[i] = searchRes;
-            res.append(words[i]);
+        for(String word:sentenceArr){
+            res.append(trie.find(word));
             res.append(" ");
         }
 
-        //去掉最后一个空格
-        return res.substring(0, res.length() - 1);
+        //取掉最后一个空格
+        return res.substring(0,res.length()-1);
     }
 
     class Trie {
@@ -39,40 +36,36 @@ public class Solution {
 
         public void insert(String word) {
             TrieNode cur = root;
-            for (int i = 0; i < word.length(); i++) {
-                char c = word.charAt(i);
-                if (cur.children[c - 'a'] == null) {
-                    TrieNode cNode = new TrieNode();
-                    cur.children[c - 'a'] = cNode;
+            for(char c:word.toCharArray()){
+                if(cur.children[c-'a'] ==null){
+                    cur.children[c-'a'] = new TrieNode();
                 }
-                cur = cur.children[c - 'a'];
+                cur = cur.children[c-'a'];
             }
             cur.isEnd = true;
         }
 
         //返回最短词根，不存在则返回""字符串
-        public String search(String word) {
+        public String find(String word) {
             TrieNode cur = root;
-            StringBuilder res = new StringBuilder();
-            for (int i = 0; i < word.length(); i++) {
-                char c = word.charAt(i);
-                if (cur.children[c - 'a'] != null) {
-                    res.append(c);
-                    cur = cur.children[c - 'a'];
-                } else {
-                    return "";
-                }
-                //到此节点为止为前缀则直接返回
-                if (cur.isEnd) {
-                    return res.toString();
+            StringBuilder sb = new StringBuilder();
+            for(char c:word.toCharArray()){
+                sb.append(c);
+                if(cur.children[c-'a'] == null){
+                    return word;
+                }else{
+                    if(cur.children[c-'a'].isEnd){
+                        return sb.toString();
+                    }
+                    cur = cur.children[c-'a'];
                 }
             }
-            return "";
+            return word;
         }
 
         class TrieNode {
-            boolean isEnd = false;
             TrieNode[] children = new TrieNode[26];
+            boolean isEnd = false;
         }
     }
 }

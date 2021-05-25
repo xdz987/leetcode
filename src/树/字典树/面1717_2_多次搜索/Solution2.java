@@ -4,6 +4,8 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 /**
+ * 【二刷：淘汰此方法。之前不够熟练，就像《农场主与火鸡》一样在总结规律】
+ *
  * 方法二：后缀树
  * 方案：以big的每个字符作为起点截取整段big查找于Trie
  *
