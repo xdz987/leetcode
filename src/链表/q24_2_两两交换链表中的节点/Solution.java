@@ -2,16 +2,10 @@ package 链表.q24_2_两两交换链表中的节点;
 
 import 链表.ListNode;
 
-public class Solution {
-    public static void main(String[] args) {
-
-    }
-}
-
 /**
- *
+ * 方式一：迭代
  */
-class SwapPairs {
+public class Solution {
     public ListNode swapPairs(ListNode head) {
         //虚拟头结点，既能保存最开始的Head又能作为pre
         ListNode dummy = new ListNode(-1);
@@ -36,6 +30,23 @@ class SwapPairs {
             pre = l1;
         }
 
+        return dummy.next;
+    }
+
+    //二刷
+    public ListNode swapPairs2(ListNode head) {
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode newHead = dummy;
+        while(head!=null && head.next!=null){
+            newHead.next = head.next;
+            ListNode next = head.next.next;
+            head.next.next = head;
+            head.next = next;
+            head = next;
+            newHead = newHead.next.next;
+
+        }
         return dummy.next;
     }
 }
