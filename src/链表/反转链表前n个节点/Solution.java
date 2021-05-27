@@ -2,6 +2,8 @@ package 链表.反转链表前n个节点;
 
 import 链表.ListNode;
 
+import java.util.List;
+
 public class Solution {
     public static void main(String[] args) {
         ListNode head = new ListNode(1);
@@ -10,7 +12,7 @@ public class Solution {
         head.next.next.next = new ListNode(4);
         head.next.next.next.next = new ListNode(5);
         ReverserN reverserN = new ReverserN();
-        head = reverserN.reverseN(head, 3);
+        head = reverserN.reverseN2(head, 3);
         while (head != null) {
             System.out.println(head.val);
             head = head.next;
@@ -65,6 +67,22 @@ class ReverserN {
         }
         //(3)交换完成后，head则作为前n个节点的最后一个节点，连接n+1节点，完成反转
         head.next = cur;
+        return pre;
+    }
+
+    //迭代test
+    public ListNode reverseN2(ListNode head, int n) {
+        int count = 0;
+        ListNode saveHead = head;
+        ListNode pre = null;
+        while (count < n) {
+            ListNode next = head.next;
+            head.next = pre;
+            pre = head;
+            head = next;
+            count++;
+        }
+        saveHead.next = head;
         return pre;
     }
 }

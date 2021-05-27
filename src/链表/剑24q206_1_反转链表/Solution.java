@@ -10,7 +10,7 @@ public class Solution {
         head.next.next.next = new ListNode(4);
         head.next.next.next.next = new ListNode(5);
         ReverseList reverseList = new ReverseList();
-        head = reverseList.reverseList(head);
+        head = reverseList.reverseList(head,null);
         while (head != null) {
             System.out.println(head.val);
             head = head.next;
@@ -24,7 +24,7 @@ public class Solution {
  * 2.迭代实现
  */
 class ReverseList {
-    //递归实现
+    //递归实现 后序
 //    public ListNode reverseList(ListNode head) {
 //        if (head == null || head.next == null) {
 //            return head;
@@ -34,16 +34,24 @@ class ReverseList {
 //        head.next = null;
 //        return last;
 //    }
+    //递归实现 前序
+    public ListNode reverseList(ListNode head,ListNode pre) {
+        if(head == null)
+            return pre;
+        ListNode next = head.next;
+        head.next = pre;
+        ListNode last = reverseList(next,head);
+        return last;
+    }
+
     //迭代实现
     public ListNode reverseList(ListNode head) {
         ListNode pre = null;
-        ListNode cur = head;
-        while (cur != null) {
-            ListNode succ = cur.next;
-            //---上面完成初始化：pre前 cur中 succ后---
-            cur.next = pre;
-            pre = cur;
-            cur = succ;
+        while(head!=null){
+            ListNode next = head.next;
+            head.next = pre;
+            pre = head;
+            head = next;
         }
         return pre;
     }
