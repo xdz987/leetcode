@@ -63,4 +63,25 @@ class Partition {
         //返回小于x的头结点
         return newLeftHead.next;
     }
+
+    //二刷
+    public ListNode partition2(ListNode head, int x) {
+        ListNode smallHead = new ListNode(-1);
+        ListNode small = smallHead;
+        ListNode bigHead = new ListNode(-1);
+        ListNode big = bigHead;
+        while (head != null) {
+            if (head.val < x) {
+                small.next = head;
+                small = small.next;
+            } else {
+                big.next = head;
+                big = big.next;
+            }
+            head = head.next;
+        }
+        big.next = null;
+        small.next = bigHead.next;
+        return smallHead.next;
+    }
 }

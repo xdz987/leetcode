@@ -25,44 +25,33 @@ public class Solution {
  */
 class RotateRight {
     public ListNode rotateRight(ListNode head, int k) {
-        if (head == null || head.next == null)
+        if (head == null || head.next == null || k == 0)
             return head;
 
-        //(1)设虚拟头结点保存原头节点
-        ListNode dummyNode = new ListNode(-1);
-        dummyNode.next = head;
-        int n = 1;
+        //(1)备份头节点地址
+        ListNode saveHead = head;
 
-        //(2)计算节点数量，并设为环
-        while (head != null) {
+        //(2)计算节点数量
+        int n = 1;
+        while (head.next != null) {
             n++;
             head = head.next;
-            if (head.next == null) {
-                //说明移完原封不动
-                if (k % n == 0) {
-                    return dummyNode.next;
-                }
-                //设为环
-                head.next = dummyNode.next;
-                break;
-            }
         }
-        head = dummyNode.next;
+        if (k % n == 0)
+            return saveHead;
 
-        //(3)根据n与k的值，断开环并设尾结点为null
-        // 倒数第k-1处断开
+        //(3)设为环
+        head.next = saveHead;
+        head = saveHead;
+
+        //(4)计算截断的位置，并重新连接
         int disconnect = k % n;
-        while (disconnect < n) {
+        while (disconnect < n - 1) {
             disconnect++;
-            //保存头部，并断开尾部
-            if (disconnect == n) {
-                dummyNode.next = head.next;
-                head.next = null;
-            } else {
-                head = head.next;
-            }
+            head = head.next;
         }
-
-        return dummyNode.next;
+        saveHead = head.next;
+        head.next = null;
+        return saveHead;
     }
 }
