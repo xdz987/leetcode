@@ -57,7 +57,7 @@ public class Solution {
         public int[] pop() {
             int[] val = queue[1];
             queue[1] = queue[size];
-            queue[size--] = new int[]{0, 0};
+            queue[size--] = new int[]{Integer.MAX_VALUE, 0};
             shiftDown(1);
             return val;
         }

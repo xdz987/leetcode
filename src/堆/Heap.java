@@ -36,7 +36,6 @@ public class Heap {
     }
 
     private void shiftDown(int i) {
-        int temp = queue[i];
         while ((i << 1) <= size) {
             //(1)选择左右子节点
             int child = i << 1;
@@ -46,33 +45,34 @@ public class Heap {
                 //选择右子节点
                 child++;
             }
-            //(2)父节点比字节点小[大顶堆]，才有必要下沉
-            if (temp < queue[child]) {
-                queue[i] = queue[child];
+            //(2)父节点比子节点小[大顶堆]，才有必要下沉
+            if (queue[i] < queue[child]) {
+                swap(i, child);
                 i = child;
             } else {
                 break;
             }
         }
-        //(3)交换到最后，i此时为子或叶节点，直接等于父或根节点
-        queue[i] = temp;
     }
 
     private void shiftUp(int i) {
-        int temp = queue[i];
         //父节点至少根节点1
         while ((i >> 1) > 0) {
             int parent = i >> 1;
             //(1)只有子节点i比父节点要大才需要上浮
-            if (temp > queue[parent]) {
-                queue[i] = queue[parent];
+            if (queue[i] > queue[parent]) {
+                swap(i, parent);
                 i = parent;
             } else {
                 break;
             }
         }
-        //(2)交换到最后，i此时为父或根节点，直接等于子或叶节点
-        queue[i] = temp;
+    }
+
+    private void swap(int i1, int i2) {
+        queue[i1] ^= queue[i2];
+        queue[i2] ^= queue[i1];
+        queue[i1] ^= queue[i2];
     }
 
     public static void main(String[] args) {
