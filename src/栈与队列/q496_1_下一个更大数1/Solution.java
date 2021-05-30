@@ -3,7 +3,7 @@ package 栈与队列.q496_1_下一个更大数1;
 import java.util.*;
 
 /**
- * 方法一：单调栈
+ * 方法一：哈希表+单调栈
  */
 class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {

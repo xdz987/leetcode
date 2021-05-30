@@ -10,42 +10,37 @@ import java.util.Queue;
  */
 public class Solution2 {
     public int[] maxSlidingWindow(int[] nums, int k) {
-        int len = nums.length;
-        if (len == 0) return new int[]{};
+        int n = nums.length;
+        if (n == 0) return new int[]{};
         //(1)初始化结果res、res的索引resI、nums的索引numsI、窗口左指针(右指针可忽略)
-        int[] res = new int[len - k + 1];
+        int[] res = new int[n - k + 1];
         int resI = 0;
-        int numsI = 0;
-        int winLeft = 0;
         //(1.2)初始化辅助空间。存放最大值的maxDeque双端队列
         Deque<Integer> maxDeque = new LinkedList<>();
-
         //(2)向填满窗口元素，并找到第一个最大值放入maxDeque
-        while (numsI < k) {
-            while (!maxDeque.isEmpty() && maxDeque.peekLast() < nums[numsI])
+        for (int j = 0; j < k; j++) {
+            while (!maxDeque.isEmpty() && maxDeque.peekLast() < nums[j]) {
                 maxDeque.pollLast();
-            maxDeque.offerLast(nums[numsI]);
-            numsI++;
+            }
+            maxDeque.offerLast(nums[j]);
         }
         //(3)存放第一个窗口的最大值
         res[resI++] = maxDeque.peek();
+        if (maxDeque.peek() == nums[0])
+            maxDeque.poll();
 
         //(4)滑动窗口
-        while (numsI < len) {
-            //(4.1)缩小左边窗口边界。滑动窗口左指针、maxDeque左边元素
-            int removeElem = nums[winLeft++];
-            if (maxDeque.peek() == removeElem) {
-                maxDeque.poll();
-            }
-
-            //(4.2)扩大右边窗口边界。即滑动窗口右指针(省略)、整理maxDeque
-            while (!maxDeque.isEmpty() && maxDeque.peekLast() < nums[numsI])
+        for (int left = 1; left <= n - k; left++) {
+            int right = left + k - 1;
+            while (!maxDeque.isEmpty() && maxDeque.peekLast() < nums[right]) {
                 maxDeque.pollLast();
-            maxDeque.offerLast(nums[numsI]);
-            //(4.3)指向下一个元素
-            numsI++;
-            //(4.4)保存当前窗口的最大值
-            res[resI++] = maxDeque.peek();
+            }
+            maxDeque.offerLast(nums[right]);
+            //保存当前窗口的最大值
+            res[left] = maxDeque.peek();
+            //当前窗口最大值为左边边界值则删除
+            if (nums[left] == maxDeque.peek())
+                maxDeque.poll();
         }
         return res;
     }

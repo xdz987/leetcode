@@ -37,9 +37,10 @@ class MaxQueue {
     public int pop_front() {
         if (queue.isEmpty()) return -1;
         //原队列出队入为maxDeque最大值，则maxDeque也出队
-        if (maxDeque.peek().equals(queue.peek())) {
+        int val = queue.poll();
+        if(val == maxDeque.peek()){
             maxDeque.poll();
         }
-        return queue.poll();
+        return val;
     }
 }

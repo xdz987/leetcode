@@ -28,19 +28,28 @@ class MyQueue {
      * Removes the element from in front of queue and returns that element.
      */
     public int pop() {
-        peek();
-        return s2.pop();
+        if(s2.isEmpty()){
+            while(!s1.isEmpty()){
+                s2.push(s1.pop());
+            }
+            return s2.isEmpty() ? -1 : s2.pop();
+        }else{
+            return s2.pop();
+        }
     }
 
     /**
      * Get the front element.
      */
     public int peek() {
-        if (s2.isEmpty()){
-            while (!s1.isEmpty())
+        if(s2.isEmpty()){
+            while(!s1.isEmpty()){
                 s2.push(s1.pop());
+            }
+            return s2.isEmpty() ? -1 : s2.peek();
+        }else{
+            return s2.peek();
         }
-        return s2.peek();
     }
 
     /**
