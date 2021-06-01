@@ -23,4 +23,29 @@ class Solution {
         }
         return sb.reverse().toString();
     }
+
+    //二刷
+    public String addBinary2(String a, String b) {
+        int n = a.length();
+        int m = b.length();
+
+        char[] aArr = a.toCharArray();
+        char[] bArr = b.toCharArray();
+
+        int carry = 0;
+
+        StringBuilder sb = new StringBuilder();
+        int aI = n-1;
+        int bI = m-1;
+        while(carry!=0 || aI>=0 || bI>=0){
+            if(aI>=0 && aArr[aI--] =='1')
+                carry++;
+            if(bI>=0 && bArr[bI--] == '1')
+                carry++;
+            int sum = carry%2;
+            carry/=2;
+            sb.append(sum);
+        }
+        return sb.reverse().toString();
+    }
 }

@@ -29,7 +29,7 @@ class Solution {
             lastSize = size;
             size = 1;
         }
-        //(2.3)最后一个字符没比较，补充
+        //(2.3)最后一个字符没比较，因为循环中continue了，补充
         res += Math.min(lastSize, size);
 
         return res;

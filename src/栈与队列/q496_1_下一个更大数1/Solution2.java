@@ -1,5 +1,8 @@
 package 栈与队列.q496_1_下一个更大数1;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 方法二：哈希表
  */

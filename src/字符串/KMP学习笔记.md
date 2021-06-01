@@ -16,19 +16,28 @@ needle：aabaaf
 next：  010120
 
  - 过程：
-[a]：没有前缀，所以0
-a[a]：前缀相同，j++，所以为j即1
-aa[b]：
- (1)a[a][b]：不相同且j=1，回退j=next[j-1]，即j=0
- (2)即next[i]为0
-aab[a]：
- (1)aa[b][a]：不相同且j=2，回退j=next[j-1]，即j=1
- (2)a[a]b[a]：相同，j=1，所以位j即为1
-aaba[a]：相同，j++，所以为j即2
-aabaa[f]：
- (1)aaba[a][f]：不相同且j=2，回退j=next[j-1]，即j=1
- (2)aab[a]a[f]：不相同且j=1，回退j=next[j-1]，即j=0
- (3)aa[b]aa[f]：即为next[i]为0
+i=0,[a]：没有前缀，所以0
+
+i=1,a[a]：前缀相同，j++即j=1，即next[1]=j
+
+i=2,aa[b]：
+ (1)a[a][b]：不相同此时j=1，回退j=next[j-1]即j=next[0]=0
+ (2)即next[i]=j=0
+
+i=3,aab[a]：
+ (1)aa[b][a]：此时j=0，不进入while
+ (2)a[a]b[a]：if判断相同，j++即j=1，
+ (3)next[i]=j=1
+
+i=4,aaba[a]：
+(1)相同不进while
+(2)if判断相同j++即j=2
+(3)next[i]=j=2
+
+i=5,aabaa[f]：
+ (1)aaba[a][f]：不相同此时j=2，回退j=next[j-1]，即j=1
+ (2)aab[a]a[f]：不相同此时j=1，回退j=next[j-1]，即j=0不仅while
+ (3)aa[b]aa[f]：if判断不相等j不变，即为next[i]=j=0
 ```
 
 ### 二、查找needle
@@ -38,6 +47,11 @@ aabaa[f]：
         2. 情况一：当不相同即while(s[i]!=needle[j]&&j>0)时，j指向它的前缀即j=next[j-1]
         2. 情况二：当s[i]==needle[j]时，j++，i++指向下一个字符
         3. 情况三：当j==m说明匹配成功，返回i-m+1，即为匹配成功的起点位置
+- 简述：==与求next过程相同，除了以下三点：==
+    1. ==i从0开始，i是<n即主串长度==
+    2. ==比较变成sArr[i]与needle[j]==
+    3. ==将next[i]赋值换成j=m与否，等于返回true==
+        - m为查询的子串长度，相等说明查找成功
 
 ##### 查找needle流程例子：
 ```
@@ -47,13 +61,14 @@ needle：aabaaf
 next：010120
 
  - 过程：
-[aabaa]b
+[aabaa]baaf
 [aabaa]f
 前5个字符均匹配，j=5，i=5
 
-aabaa[b]
+aabaa[b]aaf
 aabaa[f]
 第6个字符不匹配，j指向前缀，j=next[j-1]，即j=2
+
 aabaa[b]aaf
 aa[b]aaf
 指向前缀后发现匹配，j和i继续向前
@@ -66,7 +81,7 @@ aa[baaf]
 ### 三、KMP的性质
 #### 性质一：由重复子串组成
 #### 描述：当数组长度-最长相等前后缀的长度正好可以被数组的长度整除，说明有该字符串有重复的子字符串
-- 公式：next[len-1]!=0&&len%(len-(next[len-1]))==0
+- ==公式：next[len-1]!=0&&len%(len-(next[len-1]))==0==
     1. 首先next的最后一位不为0
     2. 其次只有全部由重复子串组成时最后取%才为0。
         - 如果由重复子串组成，从第二个重复子串开始j将不断奇数，因为前缀一直相等

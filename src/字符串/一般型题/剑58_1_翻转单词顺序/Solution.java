@@ -27,4 +27,21 @@ public class Solution {
         }
         return res.toString().trim();
     }
+
+    //二刷
+    public String reverseWords2(String s) {
+        s = s.trim();
+        if (s.isEmpty())
+            return "";
+        String[] sArr = s.split(" ");
+        int n = sArr.length;
+        StringBuilder sb = new StringBuilder();
+        for (int i = n - 1; i >= 0; i--) {
+            if (!sArr[i].isEmpty()) {
+                sb.append(sArr[i]);
+                sb.append(" ");
+            }
+        }
+        return sb.substring(0, sb.length() - 1);
+    }
 }

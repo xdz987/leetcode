@@ -31,27 +31,38 @@ class Solution {
     public String longestPalindrome2(String s) {
         int n = s.length();
         char[] sArr = s.toCharArray();
-        String res = s.substring(0, 1);
-        for (int i = 0; i < n; i++) {
+        int longLeft = 0;
+        int longRight = 0;
+        for (int i = 1; i < n - 1; i++) {
             int left = i - 1;
             int right = i + 1;
-            while (left >= 0 && right < n && sArr[left] == sArr[right]) {
-                if (right - left + 1 > res.length()) {
-                    res = s.substring(left, right + 1);
+            while (left >= 0 && right < n) {
+                if (sArr[left] != sArr[right]) {
+                    break;
                 }
-                left--;
-                right++;
-            }
-            left = i - 1;
-            right = i;
-            while (left >= 0 && right < n && sArr[left] == sArr[right]) {
-                if (right - left + 1 > res.length()) {
-                    res = s.substring(left, right + 1);
+                if (right - left > longRight - longLeft) {
+                    longLeft = left;
+                    longRight = right;
                 }
                 left--;
                 right++;
             }
         }
-        return res;
+        for (int i = 1; i < n; i++) {
+            int left = i - 1;
+            int right = i;
+            while (left >= 0 && right < n) {
+                if (sArr[left] != sArr[right]) {
+                    break;
+                }
+                if (right - left > longRight - longLeft) {
+                    longLeft = left;
+                    longRight = right;
+                }
+                left--;
+                right++;
+            }
+        }
+        return s.substring(longLeft, longRight + 1);
     }
 }
