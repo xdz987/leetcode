@@ -14,6 +14,7 @@ public class Solution {
  * 满足条件最大窗口
  */
 class MaxTurbulenceSize {
+    //7ms
     public int maxTurbulenceSize(int[] arr) {
         //(1)初始化窗口指针、满足条件窗口长度
         int left = 0;
@@ -43,6 +44,30 @@ class MaxTurbulenceSize {
             } else {
                 //(5)子数组的第以个驼峰或山谷由3个元素组成，所以补2
                 res = Math.max(res, right - left + 2);
+            }
+        }
+        return res;
+    }
+
+    //二刷：5ms
+    public int maxTurbulenceSize2(int[] arr) {
+        int n = arr.length;
+        int res = 0;
+        if (n == 1) {
+            res = 1;
+        }
+        if (n >= 2) {
+            res = arr[0] != arr[1] ? 2 : 1;
+        }
+        int left = 0;
+        int right = 0;
+        while (right < n - 2) {
+            right++;
+            if ((arr[right] < arr[right - 1] && arr[right] < arr[right + 1])
+                    || arr[right] > arr[right - 1] && arr[right] > arr[right + 1]) {
+                res = Math.max(res, right - left + 2);
+            } else {
+                left = right;
             }
         }
         return res;

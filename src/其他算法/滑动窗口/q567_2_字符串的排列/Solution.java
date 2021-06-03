@@ -3,21 +3,12 @@ package 其他算法.滑动窗口.q567_2_字符串的排列;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Solution {
-    public static void main(String[] args) {
-        String s1 = "ab";
-        String s2 = "eidbaooo";
-        CheckInclusion checkInclusion = new CheckInclusion();
-        System.out.println(checkInclusion.checkInclusion(s1, s2));
-    }
-}
-
 /**
  * 滑动(固定)窗口
  * 缩小窗口的条件为right-left超过s1的长度，返回条件为窗口内元素为s1的任意序列
  * 满足条件立即返回
  */
-class CheckInclusion {
+public class Solution {
     public boolean checkInclusion(String s1, String s2) {
         //(1)初始化窗口指针、窗口容器、窗口字符符合条件计数值、满足条件的对照容器
         int left = 0;
@@ -58,12 +49,56 @@ class CheckInclusion {
                 left++;
 
                 //(7)缩减的字符如为need所需，且先前满足条件则valid--
-                if (need.containsKey(d)){
+                if (need.containsKey(d)) {
                     if (window.get(d).equals(need.get(d))) {
                         valid--;
                     }
                 }
                 window.put(d, window.getOrDefault(d, 0) - 1);
+            }
+        }
+        return false;
+    }
+
+    //二刷：intMap
+    public boolean checkInclusion2(String s1, String s2) {
+        int n = s1.length();
+        int m = s2.length();
+        int[] window = new int[26];
+        int[] need = new int[26];
+        int valid = 0;
+        int left = 0;
+        int right = 0;
+        int target = 0;
+        for (int c : s1.toCharArray()) {
+            need[c - 'a']++;
+            if (need[c - 'a'] == 1)
+                target++;
+        }
+
+        while (right < m) {
+            int cI = s2.charAt(right) - 'a';
+            if (need[cI] > 0) {
+                window[cI]++;
+                if (window[cI] == need[cI]) {
+                    valid++;
+                }
+            }
+            right++;
+
+            if (valid == target) {
+                return true;
+            }
+
+            if (right - left >= n) {
+                int d = s2.charAt(left) - 'a';
+                if (need[d] > 0) {
+                    if (need[d] == window[d]) {
+                        valid--;
+                    }
+                }
+                window[d]--;
+                left++;
             }
         }
         return false;

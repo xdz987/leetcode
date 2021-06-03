@@ -14,6 +14,7 @@ public class Solution {
  * 缩小窗口的条件为窗口内元素之和大于target
  */
 class MinSubArrayLen {
+    //3ms
     public int minSubArrayLen(int target, int[] nums) {
         //(1)初始化窗口指针、当前窗口元素之和、当前最小连续子数组长度
         int left = 0;
@@ -37,6 +38,24 @@ class MinSubArrayLen {
                 left++;
                 windowSum -= rNum;
             }
+        }
+        return res == Integer.MAX_VALUE ? 0 : res;
+    }
+
+    //二刷：2ms
+    public int minSubArrayLen2(int target, int[] nums) {
+        int n = nums.length;
+        int res = Integer.MAX_VALUE;
+        int left = 0;
+        int right = 0;
+        int sum = 0;
+        while (right < n) {
+            sum += nums[right];
+            while (sum >= target) {
+                res = Math.min(res, right - left + 1);
+                sum -= nums[left++];
+            }
+            right++;
         }
         return res == Integer.MAX_VALUE ? 0 : res;
     }

@@ -17,6 +17,7 @@ public class Solution {
  * 最小子串即要求窗口尽可能小
  */
 class MinWindow {
+    //13ms
     public String minWindow(String s, String t) {
         //(1)初始化：窗口指针、窗口容器、窗口字符符合条件计数值、满足条件的对照容器、满足条件的子串的始终位置
         int left = 0;
@@ -73,5 +74,53 @@ class MinWindow {
             }
         }
         return end == Integer.MAX_VALUE ? "" : s.substring(start, end);
+    }
+
+    //二刷：intMap 4ms
+    public String minWindow2(String s, String t) {
+        int n = s.length();
+        int resL = 0;
+        int resR = Integer.MAX_VALUE;
+        int[] window = new int[58];
+        int[] need = new int[58];
+        int left = 0;
+        int right = 0;
+        int target = 0;
+        int valid = 0;
+        for (int c : t.toCharArray()) {
+            need[c - 'A']++;
+            if (need[c - 'A'] == 1)
+                target++;
+        }
+        while (right < n) {
+            int c = s.charAt(right) - 'A';
+            right++;
+            if (need[c] > 0) {
+                window[c]++;
+                if (need[c] == window[c]) {
+                    valid++;
+                }
+            }
+            while (valid == target) {
+                //保存结果
+                if (right - left < resR - resL) {
+                    resL = left;
+                    resR = right;
+                }
+
+                //收缩窗口
+                int d = s.charAt(left) - 'A';
+                if (need[d] > 0) {
+                    if (window[d] == need[d]) {
+                        valid--;
+                    }
+                    window[d]--;
+                }
+                left++;
+            }
+        }
+        if (resR == Integer.MAX_VALUE)
+            return "";
+        return s.substring(resL, resR);
     }
 }

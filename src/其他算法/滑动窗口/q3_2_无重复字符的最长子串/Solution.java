@@ -1,7 +1,9 @@
 package 其他算法.滑动窗口.q3_2_无重复字符的最长子串;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Solution {
     public static void main(String[] args) {
@@ -16,6 +18,7 @@ public class Solution {
  * 缩小窗口的条件是window[字符]>1
  */
 class LengthOfLongestSubstring {
+    //11ms
     public int lengthOfLongestSubstring(String s) {
         //(1)初始化：窗口指针、窗口容器、长度记录
         int left = 0;
@@ -38,6 +41,32 @@ class LengthOfLongestSubstring {
             }
             //(4)保存最长
             res = Math.max(res, right - left);
+        }
+        return res;
+    }
+
+    //二刷：7ms
+    public int lengthOfLongestSubstring2(String s) {
+        int n = s.length();
+        int left = 0;
+        int right = 0;
+        Set<Character> window = new HashSet<>();
+        int res = 0;
+        while (right < n) {
+            char c = s.charAt(right);
+            if (!window.contains(c)) {
+                window.add(c);
+                res = Math.max(res, right - left + 1);
+            } else {
+                char d = s.charAt(left);
+                while (d != c) {
+                    left++;
+                    window.remove(d);
+                    d = s.charAt(left);
+                }
+                left++;
+            }
+            right++;
         }
         return res;
     }

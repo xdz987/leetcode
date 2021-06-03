@@ -14,6 +14,7 @@ public class Solution {
  * 缩小窗口的条件：(1)0的数量大于K (2)0的数量等于K并且下一个right为0
  */
 class LongestOnes {
+    //4ms
     public int longestOnes(int[] A, int K) {
         //(1)初始化窗口指针、窗口内元素为0的累加器、当前最大连续1的长度
         int left = 0;
@@ -53,6 +54,34 @@ class LongestOnes {
             }
         }
 
+        return res;
+    }
+
+    //二刷：3ms
+    public int longestOnes2(int[] nums, int k) {
+        int n = nums.length;
+        int left = 0;
+        int right = 0;
+        int zeroSum = 0;
+        int res = 0;
+        while (right < n) {
+            if (nums[right] == 1) {
+                res = Math.max(res, right - left + 1);
+                right++;
+            } else {
+                if (zeroSum < k) {
+                    res = Math.max(res, right - left + 1);
+                    right++;
+                    zeroSum++;
+                    continue;
+                }
+                while (nums[left] != 0) {
+                    left++;
+                }
+                zeroSum--;
+                left++;
+            }
+        }
         return res;
     }
 }

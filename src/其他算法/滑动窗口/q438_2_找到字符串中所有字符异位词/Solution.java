@@ -8,9 +8,9 @@ import java.util.Map;
 public class Solution {
     public static void main(String[] args) {
         String s = "cbaebabacd";
-        String p ="abc";
+        String p = "abc";
         FindAnagrams findAnagrams = new FindAnagrams();
-        System.out.println(findAnagrams.findAnagrams(s,p));
+        System.out.println(findAnagrams.findAnagrams(s, p));
     }
 }
 
@@ -62,6 +62,49 @@ class FindAnagrams {
         }
 
         //与q567的区别
+        return res;
+    }
+
+    //二刷：intMap
+    public List<Integer> findAnagrams2(String s, String p) {
+        List<Integer> res = new ArrayList<>();
+        int n = s.length();
+        int m = p.length();
+        int valid = 0;
+        int[] window = new int[26];
+        int[] need = new int[26];
+        int target = 0;
+        for (int c : p.toCharArray()) {
+            need[c - 'a']++;
+            if (need[c - 'a'] == 1)
+                target++;
+
+        }
+        int left = 0;
+        int right = 0;
+        while (right < n) {
+            int c = s.charAt(right) - 'a';
+            right++;
+            if (need[c] > 0) {
+                window[c]++;
+                if (need[c] == window[c]) {
+                    valid++;
+                }
+            }
+            if (valid == target) {
+                res.add(left);
+            }
+            if (right - left >= m) {
+                int d = s.charAt(left) - 'a';
+                if (need[d] > 0) {
+                    if (need[d] == window[d]) {
+                        valid--;
+                    }
+                }
+                window[d]--;
+                left++;
+            }
+        }
         return res;
     }
 }
