@@ -17,6 +17,7 @@ public class Solution {
  * 2. 滑动窗口求customers在x长度内的最大值
  */
 class MaxSatisfied {
+    //3ms
     public int maxSatisfied(int[] customers, int[] grumpy, int X) {
         //(1)初始化窗口指针等
         int satisfied = 0;
@@ -50,5 +51,31 @@ class MaxSatisfied {
         }
 
         return satisfied + newSatisfied;
+    }
+
+    //二刷：2ms
+    public int maxSatisfied2(int[] customers, int[] grumpy, int minutes) {
+        int n = customers.length;
+        int res = 0;
+        for(int i=0;i<n;i++){
+            if(grumpy[i] == 0){
+                res+=customers[i];
+                customers[i]=0;
+            }
+        }
+        int maxWindow = 0;
+        int window = 0;
+        int left = 0;
+        int right = 0;
+        while(right<n){
+            window += customers[right];
+            if(right-left+1>minutes){
+                window-=customers[left];
+                left++;
+            }
+            right++;
+            maxWindow = Math.max(maxWindow,window);
+        }
+        return res+maxWindow;
     }
 }

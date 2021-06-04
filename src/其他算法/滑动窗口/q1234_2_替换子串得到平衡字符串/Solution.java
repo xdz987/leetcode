@@ -106,6 +106,7 @@ class BalancedStringMap {
         return res;
     }
 
+    // 3ms
     //返回"Q","W","E","R"中缺少char的map
     private HashMap<Character, Integer> needReplaceChar(String s) {
         String balance = "QWER";
@@ -136,5 +137,36 @@ class BalancedStringMap {
         }
 
         return need;
+    }
+
+    //二刷：6ms
+    public int balancedString3(String s) {
+        int n = s.length();
+        char[] sArr = s.toCharArray();
+        int balance = n/4;
+        int[] freq = new int[26];
+        for(char c:sArr){
+            freq[c-'A']++;
+        }
+        int res = n;
+        int left = 0;
+        int right = 0;
+        while(right<n){
+            int cI = sArr[right]-'A';
+            freq[cI]--;
+            right++;
+
+            while(left<n&&
+                    freq['Q'-'A']<=balance&&
+                    freq['W'-'A']<=balance&&
+                    freq['E'-'A']<=balance&&
+                    freq['R'-'A']<=balance){
+                res = Math.min(res,right-left);
+                int dI = sArr[left]-'A';
+                freq[dI]++;
+                left++;
+            }
+        }
+        return res;
     }
 }

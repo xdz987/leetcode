@@ -30,7 +30,6 @@ public class Solution {
  * 如left固定而向右拓展窗口：[1,2,1,2,3],k=2。 left=0固定时，直到K>2之前为 [1][1,2][1,2,1][1,2,1,2] 再收缩则[2][2,1][2,1,2] ... 直到[2][2,3] ==> 即4+3+2+1+2=12
  */
 class SubarraysWithKDistinct {
-
     public int subarraysWithKDistinct(int[] A, int K) {
         return atMostDistinct(A, K) - atMostDistinct(A, K - 1);
     }

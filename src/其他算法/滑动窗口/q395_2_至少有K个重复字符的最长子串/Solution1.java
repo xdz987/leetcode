@@ -47,7 +47,7 @@ public class Solution1 {
  * 2. 子串最大值的查找
  * 1)由上面的结论中可发行，当t小于窗口种类total时，0<res<子串最大值(正确值)，所以需不断的取max
  *
- * 三、枚举优化
+ * 三、枚举优化（淘汰，未考虑极端测试用例如abcdabcd 2）
  * 优化1：k=1时直接返回s.length
  *
  * 优化2：减少t的循环次数，即当找到最长子串后直接break
@@ -74,8 +74,6 @@ class LongestSubstring {
         int len = s.length();
         //(1)枚举，窗口内最多存在t种字符(a~z)
         for (int t = 1; t <= 26; t++) {
-            //优化，减少循环次数
-            int lastRes = res;
             int left = 0;
             int right = 0;
             int[] count = new int[26];
@@ -119,9 +117,6 @@ class LongestSubstring {
                 }
                 right++;
             }
-
-            if (lastRes == res)
-                break;
         }
         return res;
     }

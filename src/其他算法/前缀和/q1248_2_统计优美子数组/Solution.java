@@ -23,6 +23,7 @@ class NumberOfSubarrays {
         int preSum = 0;
         for (int num : nums) {
             preSum += num & 1;
+            //因为preSum-k作为数组下标
             if (preSum - k >= 0) {
                 res += map[preSum - k];
             }

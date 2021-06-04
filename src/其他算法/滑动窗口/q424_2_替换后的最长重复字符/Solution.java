@@ -17,6 +17,7 @@ public class Solution {
  * 窗口内元素数量 <= maxCharCount + K
  */
 class CharacterReplacement {
+    //9ms
     public int characterReplacement(String s, int k) {
         //(1)初始化窗口指针、当前最大频率字符数量maxCharCount、统计窗口内字符频率freq
         int left = 0;
@@ -44,6 +45,33 @@ class CharacterReplacement {
 
             //(5)保存替换后的最长重复字符
             res = Math.max(res, right - left);
+        }
+        return res;
+    }
+
+    //二刷：5ms
+    public int characterReplacement2(String s, int k) {
+        int n = s.length();
+        if (n == 0) return 0;
+        char[] sArr = s.toCharArray();
+        int res = 0;
+        int left = 0;
+        int right = 0;
+        int[] window = new int[26];
+        int maxFreq = 0;
+        while (right < n) {
+            int cI = sArr[right] - 'A';
+            window[cI]++;
+            maxFreq = Math.max(maxFreq, window[cI]);
+
+            while (right - left + 1 > maxFreq + k) {
+                int dI = sArr[left] - 'A';
+                window[dI]--;
+                left++;
+                maxFreq = Math.max(maxFreq, window[cI]);
+            }
+            res = Math.max(res, right - left + 1);
+            right++;
         }
         return res;
     }

@@ -1,4 +1,4 @@
-package 其他算法.前缀和.q1248_2_统计优美子数组;
+package 其他算法.滑动窗口.q1248_2_统计优美子数组;
 
 /**
  * 方法二：可变窗口+思路
@@ -6,7 +6,7 @@ package 其他算法.前缀和.q1248_2_统计优美子数组;
  * (2)left缩小窗口，重复(1)的过程
  */
 public class Solution2 {
-    //滑动窗口
+    //滑动窗口 7ms
     public int numberOfSubarrays(int[] nums, int k) {
         //(1)初始化窗口边界、窗口状态计数器、结果res
         int left = 0;
@@ -43,6 +43,38 @@ public class Solution2 {
                 res += (rightEvenCnt + 1) * (leftEvenCnt + 1);
 
                 //(5)left向右缩小窗口
+                left++;
+                valid--;
+            }
+        }
+        return res;
+    }
+
+    //二刷:6ms
+    public int numberOfSubarrays2(int[] nums, int k) {
+        int n = nums.length;
+        int left = 0;
+        int right = 0;
+        int res = 0;
+        int valid = 0;
+        while(right<n){
+            if((nums[right]&1)==1){
+                valid++;
+            }
+            right++;
+
+            if(valid==k){
+                int tmpRight = right;
+                while(right<n && (nums[right]&1) == 0){
+                    right++;
+                }
+
+                int tmpLeft = left;
+                while((nums[left]&1) == 0){
+                    left++;
+                }
+
+                res+=(right-tmpRight+1)*(left-tmpLeft+1);
                 left++;
                 valid--;
             }
