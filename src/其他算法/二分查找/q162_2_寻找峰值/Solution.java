@@ -18,11 +18,10 @@ class FindPeakElement {
         //(1)初始化边界
         int left = 0;
         int right = nums.length - 1;
-        int mid = 0;
 
         //(2)基本二分查找峰值
         while (left < right) {
-            mid = left + ((right - left) >>> 1);
+            int mid = (left + right) >> 1;
             if (nums[mid] > nums[mid + 1]) {
                 right = mid;
             } else {

@@ -38,9 +38,39 @@ class Search {
                 } else {
                     left = mid + 1;
                 }
-                //有半部分
+                //右半部分
             } else {
                 if (target > nums[mid] && target <= nums[right]) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+        }
+        return false;
+    }
+
+    //二刷
+    public boolean search2(int[] nums, int target) {
+        int n = nums.length;
+        int left = 0;
+        int right = n - 1;
+        while (left <= right) {
+            int mid = (left + right) >> 1;
+            if (nums[mid] == target)
+                return true;
+            if (nums[mid] == nums[left]) {
+                left++;
+                continue;
+            }
+            if (nums[mid] > nums[0]) {
+                if (target >= nums[0] && target <= nums[mid]) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            } else {
+                if (target >= nums[mid] && target <= nums[n - 1]) {
                     left = mid + 1;
                 } else {
                     right = mid - 1;

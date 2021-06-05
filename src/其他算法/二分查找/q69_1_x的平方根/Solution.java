@@ -13,6 +13,7 @@ public class Solution {
  * 平方根舍小数，则取得左段最大值
  */
 class MySqrt {
+    //2ms
     public int mySqrt(int x) {
         //(1)初始化边界等
         int left = 1;
@@ -31,5 +32,24 @@ class MySqrt {
             }
         }
         return result;
+    }
+
+    //二刷：1ms
+    public int mySqrt2(int x) {
+        if (x == 1) return 1;
+        int left = 1;
+        int right = x >> 1;
+        while (left <= right) {
+            int mid = (left + right) >> 1;
+            long cal = (long) mid * mid;
+            if (cal == x) {
+                return mid;
+            } else if (cal < x) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left - 1;
     }
 }

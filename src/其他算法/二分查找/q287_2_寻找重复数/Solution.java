@@ -9,40 +9,20 @@ public class Solution {
 }
 
 /**
- * 方法一：同q645类型，使用额外数组而去重，但空间为O(n)
  * 方法二：其他算法.二分查找+抽屉原理
  */
 class FindDuplicate {
-    // 时间为O(n) 空间为(On)
-//    public int findDuplicate(int[] nums) {
-//        //(1)初始化 额外数组
-//        byte[] markNums = new byte[nums.length + 1];
-//        int repeat = 0;
-//
-//        //(2)查找重复的数
-//        for (int num : nums) {
-//            if (markNums[num] != 0) {
-//                repeat = num;
-//                break;
-//            }
-//            markNums[num] = 1;
-//        }
-//        return repeat;
-//    }
-
     // 时间为O(nlogn) 空间为O(1)
     public int findDuplicate(int[] nums) {
         //(1)初始化 确定边界和长度 中间数 抽屉计数
         int len = nums.length;
         int left = 1;
         int right = len - 1;
-        int mid = 0;
-        int count = 0;
 
         //(2)其他算法.二分查找
         while (left < right) {
-            mid = left + ((left - right) >>> 1);
-            count = 0;
+            int mid = (left+right)>>1;
+            int count = 0;
             for (int num : nums) {
                 if (num <= mid) {
                     count++;

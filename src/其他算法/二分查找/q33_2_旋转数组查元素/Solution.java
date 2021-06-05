@@ -18,11 +18,10 @@ class Search {
         int len = nums.length;
         int left = 0;
         int right = len - 1;
-        int mid = 0;
 
         //(2)基本二分查找
         while (left <= right) {
-            mid = left + ((right - left) >>> 1);
+            int mid = left + ((right - left) >>> 1);
             if (nums[mid] == target) {
                 return mid;
             }
@@ -35,7 +34,7 @@ class Search {
                 }
             }
             // 位于左边即高段 mid=0说明在左边
-            else{
+            else {
                 if (target >= nums[0] && target < nums[mid]) {
                     right = mid - 1;
                 } else {

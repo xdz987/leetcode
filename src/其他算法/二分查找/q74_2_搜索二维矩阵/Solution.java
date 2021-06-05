@@ -17,17 +17,20 @@ public class Solution {
 class SearchMatrix {
     public boolean searchMatrix(int[][] matrix, int target) {
         //(1)初始化边界
-        int columnLen = matrix[0].length;
+        int n = matrix.length;
+        int m = matrix[0].length;
+        int size = n*m;
         int left = 0;
-        int right = matrix.length * matrix[0].length - 1;
+        int right = size-1;
 
         //(2)其他算法.二分查找
         while (left <= right) {
-            int mid = left + ((right - left) >>> 1);
-            int el = matrix[mid / columnLen][mid % columnLen];
-            if (target == el) {
+            int mid = (left+right)>>1;
+            int x = mid/m;
+            int y = mid-(x*m);
+            if (target == matrix[x][y]) {
                 return true;
-            } else if (target > el) {
+            } else if (target > matrix[x][y]) {
                 left = mid + 1;
             } else {
                 right = mid - 1;
