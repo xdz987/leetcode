@@ -26,8 +26,8 @@ class FindMin {
             } else if (nums[mid] < nums[right]) {
                 right = mid;
             } else {
-                // 存在重复，压缩右侧边界
-                right = right - 1;
+                // 存在重复，跳过重复数字
+                right--;
             }
         }
 

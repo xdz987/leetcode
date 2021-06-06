@@ -15,29 +15,25 @@ public class Solution {
  */
 class Search {
     public int search(int[] nums, int target) {
+        int n = nums.length;
         int left = 0;
-        int right = nums.length;
-        int res = 0;
+        int right = n - 1;
 
         //(1)找到等于target的最左侧值下标
         while (left < right) {
-            int mid = left + ((right - left) >>> 1);
-            if (nums[mid] == target) {
-                right = mid;
-            } else if (nums[mid] > target) {
-                right = mid;
-            } else {
+            int mid = left + ((right - left) >> 1);
+            if (nums[mid] < target) {
                 left = mid + 1;
+            } else {
+                right = mid;
             }
         }
 
         //(2)从该下标向右遍历等于target的值，res++，直到不相等直接break
-        for (int i = left; i < nums.length; i++) {
-            if (nums[i] == target) {
-                res++;
-            } else {
-                break;
-            }
+        int res = 0;
+        while (left < n && nums[left] == target) {
+            res++;
+            left++;
         }
 
         return res;
