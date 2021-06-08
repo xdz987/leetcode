@@ -77,4 +77,62 @@ class Solution {
         }
         return res;
     }
+
+    //二刷：5ms
+    public List<List<Integer>> fourSum2(int[] nums, int target) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        List<List<Integer>> res = new ArrayList<>();
+        if (n < 4) return res;
+        for (int left = 0; left < n - 3; left++) {
+            if (left > 0 && nums[left] == nums[left - 1])
+                continue;
+
+            int min = nums[left] + nums[left + 1] + nums[left + 2] + nums[left + 3];
+            if (min > target)
+                break;
+            int max = nums[left] + nums[n - 3] + nums[n - 2] + nums[n - 1];
+            if (max < target)
+                continue;
+
+            int sum = nums[left];
+            for (int midLeft = left + 1; midLeft < n - 2; midLeft++) {
+                //从起点开始，所以是left+1
+                if (midLeft > left + 1 && nums[midLeft] == nums[midLeft - 1])
+                    continue;
+
+                min = nums[left] + nums[midLeft] + nums[midLeft + 1] + nums[midLeft + 2];
+                if (min > target)
+                    break;
+                max = nums[left] + nums[midLeft] + nums[n - 2] + nums[n - 1];
+                if (max < target)
+                    continue;
+
+                sum += nums[midLeft];
+                int midRight = midLeft + 1;
+                int right = n - 1;
+                while (midRight < right) {
+                    int cal = nums[midRight] + nums[right];
+                    sum += cal;
+                    if (sum == target) {
+
+                        res.add(Arrays.asList(nums[left], nums[midLeft], nums[midRight], nums[right]));
+                        while (midRight < right && nums[midRight] == nums[midRight + 1])
+                            midRight++;
+                        while (midRight < right && nums[right] == nums[right - 1])
+                            right--;
+                        midRight++;
+                        right--;
+                    } else if (sum < target) {
+                        midRight++;
+                    } else {
+                        right--;
+                    }
+                    sum -= cal;
+                }
+                sum -= nums[midLeft];
+            }
+        }
+        return res;
+    }
 }

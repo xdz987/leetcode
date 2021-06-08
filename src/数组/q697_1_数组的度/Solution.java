@@ -17,33 +17,32 @@ public class Solution {
 class FindShortestSubArray {
     public int findShortestSubArray(int[] nums) {
         //(1)初始化容器 元素:[度，第一次出现位置，最后出现位置]
+        int n = nums.length;
         Map<Integer, int[]> map = new HashMap<>();
 
         //(2)查找所有元素出现的次数 并保存度、第一次出现位置、最后出现位置
-        for (int i = 0; i < nums.length; i++) {
+        //最大频率
+        int maxFreq = 1;
+        for (int i = 0; i < n; i++) {
             if (map.containsKey(nums[i])) {
-                map.get(nums[i])[0]++;
-                map.get(nums[i])[2] = i;
+                int[] tmp = map.get(nums[i]);
+                tmp[0]++;
+                tmp[2] = i;
+                maxFreq = Math.max(maxFreq, tmp[0]);
             } else {
                 map.put(nums[i], new int[]{1, i, i});
             }
         }
 
         //(3)从出现最多次数的元素中查找 最小度数的元素
-        int maxTimes = 0;
-        int minLen = 0;
-        for (Map.Entry<Integer, int[]> elEntry : map.entrySet()) {
-            int[] elParams = elEntry.getValue();
-            if (elParams[0] > maxTimes) {
-                maxTimes = elParams[0];
-                minLen = elParams[2] - elParams[1] + 1;
-            } else if (elParams[0] == maxTimes) {
-                if (minLen > (elParams[2] - elParams[1] + 1)) {
-                    maxTimes = elParams[0];
-                    minLen = elParams[2] - elParams[1] + 1;
-                }
+        int res = Integer.MAX_VALUE;
+        for (Map.Entry<Integer, int[]> entry : map.entrySet()) {
+            int[] params = entry.getValue();
+            //只有最大频率才有必要进行比较
+            if (params[0] == maxFreq) {
+                res = Math.min(res, params[2] - params[1] + 1);
             }
         }
-        return minLen;
+        return res;
     }
 }

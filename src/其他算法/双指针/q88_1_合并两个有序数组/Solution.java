@@ -42,4 +42,24 @@ class Merge {
             }
         }
     }
+
+    //二刷：更简洁
+    public void merge2(int[] nums1, int m, int[] nums2, int n) {
+        int n1P = m - 1;
+        int n2P = n - 1;
+        int newP = m + n - 1;
+        while (n1P >= 0 && n2P >= 0) {
+            if (nums1[n1P] >= nums2[n2P]) {
+                nums1[newP--] = nums1[n1P--];
+            } else {
+                nums1[newP--] = nums2[n2P--];
+            }
+        }
+
+        //n1P不需要处理，因为就处在nums1原地
+
+        while (n2P >= 0) {
+            nums1[newP--] = nums2[n2P--];
+        }
+    }
 }

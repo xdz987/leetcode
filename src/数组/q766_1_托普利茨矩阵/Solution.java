@@ -19,6 +19,7 @@ public class Solution {
  * 判断前一行(除元素1)与后一行(除最后元素)是否相等，如全部相等则为ToeplitzMatrix矩阵
  */
 class ToeplitzMatrix {
+    //2ms
     public boolean isToeplitzMatrix(int[][] matrix) {
         int rows = matrix.length;
         int columns = matrix[0].length;
@@ -35,6 +36,19 @@ class ToeplitzMatrix {
             next_row = Arrays.copyOfRange(matrix[i + 1], 1, columns);
             if (!Arrays.equals(row, next_row)) {
                 return false;
+            }
+        }
+        return true;
+    }
+
+    //二刷：1ms
+    public boolean isToeplitzMatrix2(int[][] matrix) {
+        int n = matrix.length-1;
+        int m = matrix[0].length-1;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(matrix[i][j] != matrix[i+1][j+1])
+                    return false;
             }
         }
         return true;

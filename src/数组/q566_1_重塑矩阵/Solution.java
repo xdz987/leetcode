@@ -42,4 +42,26 @@ class MatrixReshape {
         }
         return newShape;
     }
+
+    //二刷：
+    public int[][] matrixReshape2(int[][] mat, int r, int c) {
+        int[][] res = new int[r][c];
+        int cI = 0;
+        int rI = 0;
+        int n = mat.length;
+        int m = mat[0].length;
+        if (c * r != n * m) {
+            return mat;
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (cI == c) {
+                    cI = 0;
+                    rI++;
+                }
+                res[rI][cI++] = mat[i][j];
+            }
+        }
+        return res;
+    }
 }

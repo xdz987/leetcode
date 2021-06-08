@@ -42,7 +42,6 @@ class MaxArea {
         while (left < right) {
             area = (right - left) * Math.min(height[left], height[right]);
             res = Math.max(res, area);
-
             if (height[left] < height[right]) {
                 left++;
             } else {
