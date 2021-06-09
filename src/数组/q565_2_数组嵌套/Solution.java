@@ -61,9 +61,11 @@ class ArrayNesting {
         //(2)循环查找每个元素的最长嵌套 跳过已访问
         for (int i = 0; i < nums.length; i++) {
             if (!visitedArr[i]) {
+                visitedArr[i] = true;
                 int start = nums[i], count = 0;
                 do {
                     start = nums[start];
+                    visitedArr[start] = true;
                     count++;
                 } while (start != nums[i]);
                 res = Math.max(count, res);

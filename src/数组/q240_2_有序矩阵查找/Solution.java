@@ -17,7 +17,7 @@ public class Solution {
 }
 
 /**
- * 减而治之 从左上或右下出发遍历矩阵，不符合条件则减掉部分行或部分列的元素，无需遍历
+ * 减而治之 从左下或右上出发遍历矩阵，不符合条件则减掉部分行或部分列的元素，无需遍历
  */
 class SearchMatrix {
     public boolean searchMatrix(int[][] matrix, int target) {

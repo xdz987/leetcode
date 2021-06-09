@@ -42,4 +42,48 @@ public class Solution {
         }
         return res;
     }
+
+    //二刷：更好理解版本
+    public int[] spiralOrder2(int[][] matrix) {
+        int n = matrix.length;
+        if (n == 0) return new int[]{};
+        int m = matrix[0].length;
+        int[] res = new int[n * m];
+        int resI = 0;
+        int top = 0;
+        int bottom = n - 1;
+        int left = 0;
+        int right = m - 1;
+        while (resI <= res.length) {
+            for (int i = left; i <= right; i++) {
+                res[resI++] = matrix[top][i];
+            }
+
+            if (top == bottom) break;
+            //右上角已经遍历过
+            top++;
+            for (int i = top; i <= bottom; i++) {
+                res[resI++] = matrix[i][right];
+            }
+
+            if (left == right) break;
+            //右下角已经遍历过
+            right--;
+            for (int i = right; i >= left; i--) {
+                res[resI++] = matrix[bottom][i];
+            }
+
+            if (top == bottom) break;
+            //左下角已经遍历过
+            bottom--;
+            for (int i = bottom; i >= top; i--) {
+                res[resI++] = matrix[i][left];
+            }
+
+            if (left == right) break;
+            //左上角已经遍历过
+            left++;
+        }
+        return res;
+    }
 }
