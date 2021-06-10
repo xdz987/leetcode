@@ -17,9 +17,10 @@ public class Solution2 {
         }
         //(2)当存在元素差值为1的元素时，保存相加频率
         int res = 0;
-        for (int num : map.keySet()) {
-            if (map.containsKey(num + 1)) {
-                res = Math.max(map.get(num) + map.get(num + 1), res);
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            int pre = map.getOrDefault(entry.getKey() - 1, 0);
+            if (pre != 0) {
+                res = Math.max(res, entry.getValue() + pre);
             }
         }
         return res;

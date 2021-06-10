@@ -12,23 +12,12 @@ import java.util.Set;
  */
 class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
-        int n1 = nums1.length;
-        int n2 = nums2.length;
-        int[] bigNums;
-        int[] smallNums;
-        if (n1 > n2) {
-            bigNums = nums1;
-            smallNums = nums2;
-        } else {
-            bigNums = nums2;
-            smallNums = nums1;
-        }
         Set<Integer> set = new HashSet<>();
-        for (int num : bigNums) {
+        for (int num : nums1) {
             set.add(num);
         }
         Set<Integer> list = new HashSet<>();
-        for (int num : smallNums) {
+        for (int num : nums2) {
             if (set.contains(num))
                 list.add(num);
         }

@@ -26,17 +26,16 @@ class QuickSort {
     private int partition(int[] nums, int left, int right) {
         swap(nums, left, (left + right) >> 1);
 
-        int pivot = left;
-        int index = pivot + 1;
+        int index = left + 1;
         for (int i = index; i <= right; i++) {
-            if (nums[pivot] < nums[i]) {
+            if (nums[left] < nums[i]) {
                 //将小于pivot的数，替换到pivot的右边
                 swap(nums, index, i);
                 index++;
             }
         }
         //将pivot交换左半的最后一个小于pivot的数。例如「5」,3,2,「4」,6,9,8  ==> 4,3,2,「5」,6,9,8
-        swap(nums, pivot, index - 1);
+        swap(nums, left, index - 1);
         return index - 1;
     }
 

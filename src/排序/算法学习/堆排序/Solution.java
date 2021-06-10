@@ -4,7 +4,8 @@ import java.util.Arrays;
 
 public class Solution {
     public static void main(String[] args) {
-        int[] nums = new int[]{5, 2, 1, 7, 6, 14, 3, 56, 4};
+        int[] nums = new int[]{5, 2, 4, 6, 1, 9, 3};
+        long startTime = System.nanoTime();    //获取开始时间
         Heap bigHeap = new Heap(nums.length);
         for (int num : nums) {
             bigHeap.push(num);
@@ -12,6 +13,8 @@ public class Solution {
         for (int i = 0; i < nums.length; i++) {
             nums[i] = bigHeap.pop();
         }
+        long endTime = System.nanoTime();    //获取结束时间
+        System.out.println("程序运行时间：" + (endTime - startTime) + "ms");    //输出程序运行时间
         System.out.println(Arrays.toString(nums));
     }
 

@@ -1,7 +1,9 @@
 package 哈希表.q128_3_最长连续序列;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 方法二：哈希表
@@ -31,6 +33,26 @@ public class Solution2 {
                 res = Math.max(count, res);
             }
         }
+        return res;
+    }
+
+    //二刷：更简洁
+    public int longestConsecutive2(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            set.add(num);
+        }
+        int res = 0;
+        for (int num : set) {
+            if (!set.contains(num - 1)) {
+                int count = 1;
+                while (set.contains(++num)) {
+                    count++;
+                }
+                res = Math.max(res, count);
+            }
+        }
+
         return res;
     }
 }

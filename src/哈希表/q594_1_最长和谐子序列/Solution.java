@@ -14,12 +14,15 @@ class Solution {
         int n = nums.length;
         int res = 0;
         //(2)遍历所有元素
-        for (int i = 0, j = 0; i < n; i++) {
+        int start = 0;
+        for (int end = 1; end < nums.length; end++) {
             //(2.1)差值超过1则跳过
-            if (nums[i] - nums[j] > 1) j++;
+            if (nums[end] - nums[start] > 1) {
+                start++;
+            }
             //(2.2)找到差值为1，则j~i符合最大最小差值为1的需求
-            if (nums[i] - nums[j] == 1) {
-                res = Math.max(res, i - j + 1);
+            if (nums[end] - nums[start] == 1) {
+                res = Math.max(res, end - start + 1);
             }
         }
         return res;
