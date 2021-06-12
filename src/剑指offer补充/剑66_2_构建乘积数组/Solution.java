@@ -10,9 +10,10 @@ import java.util.Arrays;
 class Solution {
     public int[] constructArr(int[] a) {
         int n = a.length;
+        if(n==0) return new int[]{};
         int[] res = new int[n];
-        Arrays.fill(res,1);
         int preSum = 1;
+        res[0] = 1;
         for (int i = 1; i < n; i++) {
             preSum *= a[i - 1];
             res[i] = preSum;

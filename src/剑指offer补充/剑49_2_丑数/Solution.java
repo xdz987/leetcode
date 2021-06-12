@@ -13,10 +13,13 @@ class Solution {
         //第一个丑数
         dp[0] = 1;
         for (int i = 1; i < n; i++) {
+            //(1)取得第i个丑数
             int n2 = dp[a] * 2;
             int n3 = dp[b] * 3;
             int n5 = dp[c] * 5;
             dp[i] = Math.min(n2, Math.min(n3, n5));
+
+            //(2)更新下标a,b,c，使得下一次计算能够获得下一个丑数
             if (dp[i] == n2) a++;
             if (dp[i] == n3) b++;
             if (dp[i] == n5) c++;

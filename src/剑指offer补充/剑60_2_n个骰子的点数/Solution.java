@@ -1,38 +1,27 @@
 package 剑指offer补充.剑60_2_n个骰子的点数;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 /**
- * 方法一：回溯+哈希表【超时】
- * 复杂度：O(6^n)
+ * 方法二：DP
+ * Java：100% 57%
+ * 复杂度：O(N^2) O(N)
  */
-class Solution {
+public class Solution {
     public double[] dicesProbability(int n) {
-        Map<Integer, Integer> map = new HashMap<>();
-        backTrack(map, 0, 0, n);
-        double total = 6;
-        for (int i = 1; i < n; i++) {
-            total *= 6;
+        double[] dp = new double[6];
+        Arrays.fill(dp, 1.0 / 6.0);
+        for (int i = 2; i <= n; i++) {
+            //筛子数2、3..时，不可能出现1、2..的点数，即i*6-(i-1)
+            double[] tmp = new double[i * 6 - (i - 1)];
+            for (int j = 0; j < dp.length; j++) {
+                //对应每个骰子
+                for (int k = 0; k < 6; k++) {
+                    tmp[j + k] += dp[j] / 6.0;
+                }
+            }
+            dp = tmp;
         }
-        double[] res = new double[map.size()];
-        int resI = 0;
-        for (int key : map.keySet()) {
-            res[resI++] = map.get(key) / total;
-        }
-        return res;
-    }
-
-    private void backTrack(Map<Integer, Integer> map, int track, int depth, int limit) {
-        if (depth == limit) {
-            map.put(track, map.getOrDefault(track, 0) + 1);
-            return;
-        }
-
-        for (int i = 1; i <= 6; i++) {
-            track += i;
-            backTrack(map, track, depth + 1, limit);
-            track -= i;
-        }
+        return dp;
     }
 }

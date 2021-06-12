@@ -3,7 +3,7 @@ package 剑指offer补充.剑60_2_n个骰子的点数;
 /**
  * 方法三：直接法
  */
-public class Solution3 {
+public class Funny {
     public double[] dicesProbability(int n) {
         if (n == 1)
             return new double[]{0.16667, 0.16667, 0.16667, 0.16667, 0.16667, 0.16667};
