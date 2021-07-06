@@ -12,6 +12,7 @@ class Solution {
         if (root == null)
             return null;
         inorderTraversal(root);
+        //将头尾节点向连接
         head.left = pre;
         pre.right = head;
         return head;
@@ -21,10 +22,14 @@ class Solution {
         if (cur == null)
             return;
         inorderTraversal(cur.left);
-        if (pre != null)
-            pre.right = cur;
-        else
+        //(1)只会执行一次，保存中序遍历第一个节点，即Head头结点
+        if(pre == null)
             head = cur;
+
+        //(2)连接前后节点转为双链表
+        if (pre != null) {
+            pre.right = cur;
+        }
         cur.left = pre;
         pre = cur;
         inorderTraversal(cur.right);
