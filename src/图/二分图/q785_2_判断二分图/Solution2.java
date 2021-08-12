@@ -33,4 +33,16 @@ public class Solution2 {
         //(3)到此说明该顶点联通的顶点为(局部)二分图
         return true;
     }
+
+    private boolean dfs2(int[][] graph, int[] flags, int v, int color) {
+        flags[v] = color;
+        for (int w : graph[v]) {
+            if (flags[w] == flags[v])
+                return false;
+            if (flags[w] == 0 && !dfs(graph, flags, w, -color)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

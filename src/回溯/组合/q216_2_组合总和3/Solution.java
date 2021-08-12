@@ -22,7 +22,11 @@ class Solution {
                 res.add(new ArrayList<>(track));
             return;
         }
-        for (int i = start; i <= 9; i++) {
+        if(trackSum>n)
+            return;
+
+        int limit = Math.min(9,n);
+        for (int i = start; i <= limit; i++) {
             trackSum += i;
             track.add(i);
             backTrack(k, n, i + 1, track, trackSum);

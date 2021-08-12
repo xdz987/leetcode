@@ -23,7 +23,7 @@ public class Solution {
 
         //(2)联通相连的城市
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
+            for (int j = 0; j < i; j++) {
                 if (isConnected[i][j] == 1) {
                     union(i, j);
                 }

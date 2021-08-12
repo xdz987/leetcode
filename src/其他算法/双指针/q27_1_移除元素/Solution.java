@@ -18,4 +18,19 @@ class Solution {
         }
         return right;
     }
+
+    //三刷：形式不同
+    public int removeElement3(int[] nums, int val) {
+        int n = nums.length;
+        int right = n-1;
+        int left = 0;
+        while(left<=right){
+            if(nums[left] == val){
+                nums[left] = nums[right--];
+            }else{
+                left++;
+            }
+        }
+        return right+1;
+    }
 }

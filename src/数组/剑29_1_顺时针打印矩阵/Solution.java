@@ -86,4 +86,41 @@ public class Solution {
         }
         return res;
     }
+
+    //三刷：直接写出
+    public int[] spiralOrder3(int[][] matrix) {
+        int n = matrix.length;
+        if(n==0) return new int[]{};
+        int m = matrix[0].length;
+        int length = n*m;
+        int[] res = new int[length];
+        int resI = 0;
+        int left = 0;
+        int right = m-1;
+        int top = 0;
+        int bottom = n-1;
+        while(resI<length){
+            if(left>right) break;
+            for(int i=left;i<=right;i++){
+                res[resI++] = matrix[top][i];
+            }
+            top++;
+            if(top>bottom) break;
+            for(int i=top;i<=bottom;i++){
+                res[resI++] = matrix[i][right];
+            }
+            right--;
+            if(right<left) break;
+            for(int i=right;i>=left;i--){
+                res[resI++] = matrix[bottom][i];
+            }
+            bottom--;
+            if(bottom<top) break;
+            for(int i=bottom;i>=top;i--){
+                res[resI++] = matrix[i][left];
+            }
+            left++;
+        }
+        return res;
+    }
 }

@@ -7,11 +7,14 @@ import java.util.Arrays;
  */
 public class Solution2 {
     public String minNumber(int[] nums) {
-        String[] list = new String[nums.length];
+        String[] sNums = new String[nums.length];
         for (int i = 0; i < nums.length; i++) {
-            list[i] = String.valueOf(nums[i]);
+            sNums[i] = String.valueOf(nums[i]);
         }
-        Arrays.sort(list, (a, b) -> (a + b).compareTo(b + a));
-        return String.join("", list);
+        Arrays.sort(sNums, (a, b) -> (a + b).compareTo(b + a));
+        StringBuilder res = new StringBuilder();
+        for(String str:sNums)
+            res.append(str);
+        return res.toString();
     }
 }

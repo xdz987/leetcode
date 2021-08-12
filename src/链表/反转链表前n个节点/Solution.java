@@ -73,16 +73,16 @@ class ReverserN {
     //迭代test
     public ListNode reverseN2(ListNode head, int n) {
         int count = 0;
-        ListNode saveHead = head;
+        ListNode cur = head;
         ListNode pre = null;
-        while (count < n) {
-            ListNode next = head.next;
-            head.next = pre;
-            pre = head;
-            head = next;
+        while (cur != null && count < n) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
             count++;
         }
-        saveHead.next = head;
+        head.next = cur;
         return pre;
     }
 }

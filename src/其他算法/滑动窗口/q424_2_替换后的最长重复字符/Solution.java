@@ -75,4 +75,36 @@ class CharacterReplacement {
         }
         return res;
     }
+
+    //三刷：5ms 补充
+    public int characterReplacement3(String s, int k) {
+        int n = s.length();
+        int[] window = new int[26];
+        int left = 0;
+        int right = 0;
+        int res = 0;
+        int maxFreq = 0;
+        int maxI = 0;
+        while(right<n){
+            int rI = s.charAt(right)-'A';
+            window[rI]++;
+            right++;
+            //等于也保存，因为后面缩小窗口时可能更新maxFreq--。如这里相等不保存，那么会导致maxFreq不是当前窗口最大频率字符
+            if(window[rI]>=maxFreq){
+                maxFreq = window[rI];
+                maxI = rI;
+            }
+            while(right-left>maxFreq+k){
+                int lI = s.charAt(left)-'A';
+                //更新max避免bug
+                if(lI == maxI){
+                    maxFreq--;
+                }
+                window[lI]--;
+                left++;
+            }
+            res = Math.max(res,right-left);
+        }
+        return res;
+    }
 }

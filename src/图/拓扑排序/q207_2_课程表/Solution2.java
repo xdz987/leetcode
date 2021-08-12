@@ -21,7 +21,7 @@ public class Solution2 {
         }
         //(2)对每个节点DFS
         for (int i = 0; i < numCourses; i++) {
-            if (!dfs(adjacency, flags, i)) return false;
+            if (flags[i]==0 && !dfs(adjacency, flags, i)) return false;
         }
         return true;
     }

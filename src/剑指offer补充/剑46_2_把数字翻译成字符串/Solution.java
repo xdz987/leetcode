@@ -49,4 +49,23 @@ class Solution {
         }
         return cur;
     }
+
+    //三刷：代码更简洁
+    public int translateNum3(int num) {
+        char[] numArr = String.valueOf(num).toCharArray();
+        int n = numArr.length;
+        if(n<=1) return n;
+        int[] dp = new int[n+1];
+        dp[0] = 1;//用于初始化
+        dp[1] = 1;
+        for(int i=2;i<=n;i++){
+            int toNum = (numArr[i-2]-'0')*10 + numArr[i-1]-'0';
+            if(numArr[i-2]!='0' && toNum>0 && toNum<=25){
+                dp[i] = dp[i-1] + dp[i-2];
+            }else{
+                dp[i] = dp[i-1];
+            }
+        }
+        return dp[n];
+    }
 }

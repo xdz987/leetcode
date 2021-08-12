@@ -16,7 +16,7 @@ class FindMin {
     public int findMin(int[] nums) {
         //(1)初始化边界等
         int left = 0;
-        int right = nums.length - 1;
+        int right = nums.length;
         int mid = 0;
 
         //(2)左侧边界二分查找 两种边界

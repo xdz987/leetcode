@@ -13,6 +13,7 @@ public class Solution {
  * 找规律 构建法
  */
 class ConstructArray {
+    //一刷：1ms
     public int[] constructArray(int n, int k) {
         //(1)初始化 结果数组
         int[] result = new int[n];
@@ -28,5 +29,22 @@ class ConstructArray {
             result[i] = i + 1;
         }
         return result;
+    }
+
+    //三刷：更快更好理解 0ms
+    public int[] constructArray2(int n, int k) {
+        int[] res = new int[n];
+        int tmp = 1;
+        for(int i=0;i<k+1;i+=2){
+            res[i]=tmp++;
+        }
+        tmp = k+1;
+        for(int i=1;i<k+1;i+=2){
+            res[i]=tmp--;
+        }
+        for(int i=k+1;i<n;i++){
+            res[i] = i+1;
+        }
+        return res;
     }
 }

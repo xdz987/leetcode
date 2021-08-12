@@ -9,29 +9,22 @@ import 链表.ListNode;
  */
 class Solution {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        ListNode newHead = new ListNode(-1);
-        ListNode dummy = newHead;
-        while (l1 != null && l2 != null) {
-            if (l1.val <= l2.val) {
-                newHead.next = l1;
-                newHead = newHead.next;
+        ListNode dummy = new ListNode(-1);
+        ListNode cur = dummy;
+        while(l1!=null && l2!=null){
+            if(l1.val<l2.val){
+                cur.next = l1;
                 l1 = l1.next;
-            } else {
-                newHead.next = l2;
-                newHead = newHead.next;
+            }else{
+                cur.next = l2;
                 l2 = l2.next;
             }
+            cur = cur.next;
         }
-        while (l1 != null) {
-            newHead.next = l1;
-            newHead = newHead.next;
-            l1 = l1.next;
-        }
-        while (l2 != null) {
-            newHead.next = l2;
-            newHead = newHead.next;
-            l2 = l2.next;
-        }
+        if(l1!=null)
+            cur.next = l1;
+        if(l2!=null)
+            cur.next = l2;
         return dummy.next;
     }
 }

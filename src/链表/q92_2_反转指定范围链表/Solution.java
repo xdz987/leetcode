@@ -149,3 +149,38 @@ class ItReverseBetween2 {
         return dummyNode.next;
     }
 }
+class Solution2 {
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if(left == 1){
+            ListNode cutP2 = reverseN(head,right);
+            head.next = cutP4;
+            return cutP2;
+        }
+        int range = right - left+1;
+        ListNode cutP1 = head;
+        while(cutP1!=null && left!=2){
+            cutP1 = cutP1.next;
+            left--;
+        }
+        ListNode cutP3 = cutP1.next;
+        ListNode cutP2 = reverseN(cutP1.next,range);
+        cutP1.next = cutP2;
+        cutP3.next = cutP4;
+        return head;
+    }
+
+    ListNode cutP4;
+    private ListNode reverseN(ListNode head,int range){
+        int count = 0;
+        cutP4 = head;
+        ListNode pre = null;
+        while(cutP4!=null && count !=range){
+            ListNode next = cutP4.next;
+            cutP4.next = pre;
+            pre = cutP4;
+            cutP4 = next;
+            count++;
+        }
+        return pre;
+    }
+}

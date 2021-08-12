@@ -17,4 +17,18 @@ class Solution {
         }
         return -1;
     }
+
+    //三刷：节省空间
+    public int findRepeatNumber3(int[] nums) {
+        int n = nums.length;
+        boolean[] flags = new boolean[n];
+        for(int i=0;i<n;i++){
+            if(flags[nums[i]]){
+                return nums[i];
+            }else{
+                flags[nums[i]] = true;
+            }
+        }
+        return -1;
+    }
 }

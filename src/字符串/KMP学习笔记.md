@@ -16,28 +16,36 @@ needle：aabaaf
 next：  010120
 
  - 过程：
+初始：j=0,i=1
+
 i=0,[a]：没有前缀，所以0
+next[000000]
 
 i=1,a[a]：前缀相同，j++即j=1，即next[1]=j
+next[010000]
 
 i=2,aa[b]：
  (1)a[a][b]：不相同此时j=1，回退j=next[j-1]即j=next[0]=0
  (2)即next[i]=j=0
+next[010000]
 
 i=3,aab[a]：
- (1)aa[b][a]：此时j=0，不进入while
- (2)a[a]b[a]：if判断相同，j++即j=1，
+ (1)[a]ab[a]：此时j=0，不进入while
+ (2)[a]ab[a]：if判断相同，j++即j=1，
  (3)next[i]=j=1
+next[010100]
 
 i=4,aaba[a]：
-(1)相同不进while
-(2)if判断相同j++即j=2
+(1)a[a]ba[a]：相同不进while
+(2)a[a]ba[a]：if判断相同j++即j=2
 (3)next[i]=j=2
+next[010120]
 
 i=5,aabaa[f]：
- (1)aaba[a][f]：不相同此时j=2，回退j=next[j-1]，即j=1
- (2)aab[a]a[f]：不相同此时j=1，回退j=next[j-1]，即j=0不仅while
- (3)aa[b]aa[f]：if判断不相等j不变，即为next[i]=j=0
+ (1)aa[b]aa[f]：不相同此时j=2，回退j=next[j-1]，即j=1
+ (2)a[a]baa[f]：不相同此时j=1，回退j=next[j-1]，即j=0不进while
+ (3)[a]abaa[f]：if判断不相等j不变，即为next[i]=j=0
+next[010120]
 ```
 
 ### 二、查找needle
@@ -61,13 +69,15 @@ needle：aabaaf
 next：010120
 
  - 过程：
+初始：j=0,i=0
+
 [aabaa]baaf
 [aabaa]f
-前5个字符均匹配，j=5，i=5
+前5个字符均相等，j=5，i=5
 
 aabaa[b]aaf
 aabaa[f]
-第6个字符不匹配，j指向前缀，j=next[j-1]，即j=2
+第6个字符不匹配，j指向前缀即j=next[5-1]=next[4]=2
 
 aabaa[b]aaf
 aa[b]aaf
@@ -75,13 +85,14 @@ aa[b]aaf
 
 aabaa[baaf]
 aa[baaf]
-匹配成功j=6=m，此时i=8，返回i-m+1即8-6+1=3，刚好对应位置
+匹配成功j=6=m，此时i=8，返回i-m+1即8-6+1=3，即needle匹配的位置从3到m+3
 ```
 
 ### 三、KMP的性质
 #### 性质一：由重复子串组成
-#### 描述：当数组长度-最长相等前后缀的长度正好可以被数组的长度整除，说明有该字符串有重复的子字符串
-- ==公式：next[len-1]!=0&&len%(len-(next[len-1]))==0==
+#### 描述：当数组长度-最长相等前后缀的长度正好可以被数组的长度整除，说明有该字符串由重复子字符串拼接而成
+- ==公式：next[len-1]!=0&&len%(len-(next[len-1]))=0==
+    - ==next[len-1]不为0，因为0%任何数都为0==
     1. 首先next的最后一位不为0
     2. 其次只有全部由重复子串组成时最后取%才为0。
         - 如果由重复子串组成，从第二个重复子串开始j将不断奇数，因为前缀一直相等
@@ -92,6 +103,8 @@ aa[baaf]
 asdfasdfasdf
 000012345678
 其中len=12
+
+next[len-1]不为0，因为0%任何数都为0
 
 即：next[12-1]=8
 公式：12%(12-8)==0

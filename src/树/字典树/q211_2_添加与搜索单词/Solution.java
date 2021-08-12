@@ -57,6 +57,28 @@ class WordDictionary {
         return cur.count > 0;
     }
 
+    public boolean search2(String word) {
+        return searchHelp2(root,word.toCharArray(),0);
+    }
+    private boolean searchHelp2(TrieNode cur,char[] wArr,int index){
+        for(int i=index;i<wArr.length;i++){
+            char c = wArr[i];
+            if(wArr[i] == '.'){
+                for(int j=0;j<26;j++){
+                    if(cur.children[j] !=null && searchHelp2(cur.children[j],wArr,i+1)){
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            if(cur.children[c-'a'] == null)
+                return false;
+            cur = cur.children[c-'a'];
+        }
+        return cur.count>0;
+    }
+
     class TrieNode {
         int count;
         int preCount;

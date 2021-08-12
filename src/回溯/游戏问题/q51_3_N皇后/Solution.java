@@ -42,7 +42,6 @@ class Solution {
             chessboard[row][col] = 'Q';
             backTrack(chessboard, n, row + 1);
             chessboard[row][col] = '.';
-
         }
     }
 

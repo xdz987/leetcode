@@ -52,4 +52,26 @@ class Solution {
         }
         return res;
     }
+
+    //三刷
+    public int numberOfArithmeticSlices3(int[] nums) {
+        int n = nums.length;
+        if(n<3) return 0;
+        int preDiff = nums[1]-nums[0];
+        int cur = 2;
+        int res = 0;
+        int base = 1;
+        while(cur<n){
+            int curDiff = nums[cur]-nums[cur-1];
+            if(curDiff == preDiff){
+                res+=base;
+                base++;
+            }else{
+                base = 1;
+            }
+            cur++;
+            preDiff = curDiff;
+        }
+        return res;
+    }
 }

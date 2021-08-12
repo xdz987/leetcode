@@ -1,7 +1,6 @@
 package 剑指offer补充.剑62_1_圆圈最后数字;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 方法一：模拟

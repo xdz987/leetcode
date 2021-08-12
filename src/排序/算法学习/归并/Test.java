@@ -37,6 +37,6 @@ public class Test {
         if (rI <= right) {
             System.arraycopy(nums, rI, arr, arrI, right - rI + 1);
         }
-        System.arraycopy(arr, 0, nums, left, right - left + 1);
+        System.arraycopy(arr, 0, nums, left, arr.length);
     }
 }

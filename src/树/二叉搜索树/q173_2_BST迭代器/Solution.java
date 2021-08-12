@@ -66,3 +66,25 @@ class BSTIterator {
         return cur != null || !stack.isEmpty();
     }
 }
+
+class BSTIterator2 {
+    Queue<Integer> queue = new LinkedList<>();
+    public BSTIterator2(TreeNode root) {
+        build(root);
+    }
+
+    private void build(TreeNode root){
+        if(root == null) return;
+        build(root.left);
+        queue.offer(root.val);
+        build(root.right);
+    }
+
+    public int next() {
+        return queue.poll();
+    }
+
+    public boolean hasNext() {
+        return !queue.isEmpty();
+    }
+}

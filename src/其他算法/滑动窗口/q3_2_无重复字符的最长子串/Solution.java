@@ -18,7 +18,38 @@ public class Solution {
  * 缩小窗口的条件是window[字符]>1
  */
 class LengthOfLongestSubstring {
-    //11ms
+
+    //三刷 4ms
+    public int lengthOfLongestSubstring3(String s) {
+        int n = s.length();
+        Set<Character> set = new HashSet<>();
+        boolean valid = true;
+        int left = 0;
+        int right = 0;
+        int res = 0;
+        while(right<n){
+            char c = s.charAt(right);
+            if(set.contains(c)){
+                valid = false;
+            }else{
+                set.add(c);
+            }
+            while(!valid){
+                char d = s.charAt(left);
+                if(d==c){
+                    valid = true;
+                }else{
+                    set.remove(d);
+                }
+                left++;
+            }
+            right++;
+            res = Math.max(res,right-left);
+        }
+        return res;
+    }
+
+    //一刷：11ms
     public int lengthOfLongestSubstring(String s) {
         //(1)初始化：窗口指针、窗口容器、长度记录
         int left = 0;

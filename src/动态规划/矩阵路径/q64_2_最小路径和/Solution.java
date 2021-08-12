@@ -17,6 +17,7 @@ class Solution {
             sum += grid[i][0];
             dp[i][0] = sum;
         }
+        sum = 0;
         for (int i = 0; i < n; i++) {
             sum += grid[0][i];
             dp[0][i] = sum;

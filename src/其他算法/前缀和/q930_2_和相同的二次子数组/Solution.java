@@ -16,16 +16,16 @@ class NumSubarraysWithSum {
     // 优化前缀和 int[]
     public int numSubarraysWithSum(int[] nums, int goal) {
         int n = nums.length;
-        int[] map = new int[n + 1];
+        int[] preCount = new int[n+1];
+        preCount[0] = 1;
+        int count = 0;
         int res = 0;
-        int preSum = 0;
-        map[0] = 1;
-        for (int i = 0; i < n; i++) {
-            preSum += nums[i] & 1;
-            if (preSum - goal >= 0) {
-                res += map[preSum - goal];
+        for(int i=0;i<n;i++){
+            count+=nums[i];
+            if(count>=goal){
+                res+=preCount[count-goal];
             }
-            map[preSum]++;
+            preCount[count]++;
         }
         return res;
     }

@@ -17,25 +17,30 @@ class Search {
     public int search(int[] nums, int target) {
         int n = nums.length;
         int left = 0;
-        int right = n - 1;
+        int right = n;
 
         //(1)找到等于target的最左侧值下标
-        while (left < right) {
-            int mid = left + ((right - left) >> 1);
-            if (nums[mid] < target) {
-                left = mid + 1;
-            } else {
+        while(left<right){
+            int mid = left+((right-left)>>1);
+            if(nums[mid] > target){
+                right = mid;
+            }else if(nums[mid]<target){
+                left = mid+1;
+            }else{
                 right = mid;
             }
         }
 
-        //(2)从该下标向右遍历等于target的值，res++，直到不相等直接break
-        int res = 0;
-        while (left < n && nums[left] == target) {
-            res++;
-            left++;
+        int save = left;
+        right = n;
+        while(left<right){
+            int mid = left+((right-left)>>1);
+            if(nums[mid]>target){
+                right = mid;
+            }else{
+                left = mid+1;
+            }
         }
-
-        return res;
+        return left-save;
     }
 }

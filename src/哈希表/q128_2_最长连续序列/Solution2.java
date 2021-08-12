@@ -1,4 +1,4 @@
-package 哈希表.q128_3_最长连续序列;
+package 哈希表.q128_2_最长连续序列;
 
 import java.util.HashMap;
 import java.util.HashSet;

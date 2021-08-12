@@ -120,4 +120,51 @@ class LongestSubstring {
         }
         return res;
     }
+
+    //三刷：习惯改变
+    public int longestSubstring3(String s, int k) {
+        int n = s.length();
+        if(k==1) return n;
+        int res = 0;
+        int lastRes = 0;
+        for(int i=1;i<=26;i++){
+            lastRes = res;
+            int left = 0;
+            int right = 0;
+            int noValid = 0;
+            int cCount = 0;
+            int[] window = new int[26];
+            while(right<n){
+                int rI = s.charAt(right)-'a';
+                window[rI]++;
+                if(window[rI] == 1){
+                    noValid++;
+                    cCount++;
+                }
+                if(window[rI] == k){
+                    noValid--;
+                }
+                right++;
+                if(noValid == 0){
+                    res=Math.max(res,right-left);
+                }
+                while(cCount > i){
+                    int lI = s.charAt(left)-'a';
+                    window[lI]--;
+                    if(window[lI] == k-1){
+                        noValid++;
+                    }
+                    if(window[lI]==0){
+                        noValid--;
+                        cCount--;
+                    }
+                    left++;
+                }
+            }
+            if(lastRes == res){
+                break;
+            }
+        }
+        return res;
+    }
 }

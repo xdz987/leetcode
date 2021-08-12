@@ -86,4 +86,42 @@ class Solution {
         }
         return res;
     }
+
+    //三刷：更好理解
+    public List<List<Integer>> threeSum3(int[] nums) {
+        int n = nums.length;
+        List<List<Integer>> res = new ArrayList<>();
+        if(n<3) return res;
+        Arrays.sort(nums);
+        for(int left = 0;left<n-2;left++){
+            if(nums[left]>0){
+                break;
+            }
+            if(left>0 && nums[left] == nums[left-1])
+                continue;
+            int mid = left+1;
+            int right = n-1;
+            while(mid<right){
+                int sum = nums[left]+nums[mid]+nums[right];
+                if(sum==0){
+                    List<Integer> tmp = new ArrayList<>();
+                    tmp.add(nums[left]);
+                    tmp.add(nums[mid]);
+                    tmp.add(nums[right]);
+                    res.add(tmp);
+                    while(mid > left+1 && nums[mid] == nums[mid-1])
+                        mid++;
+                    while(right > mid && nums[right] == nums[right-1])
+                        right--;
+                    mid++;
+                    right--;
+                }else if(sum>0){
+                    right--;
+                }else{
+                    mid++;
+                }
+            }
+        }
+        return res;
+    }
 }

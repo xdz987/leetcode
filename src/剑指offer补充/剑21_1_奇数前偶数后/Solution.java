@@ -25,4 +25,27 @@ class Solution {
         }
         return nums;
     }
+
+    //三刷：更简洁
+    public int[] exchange3(int[] nums) {
+        int n = nums.length;
+        int left = 0;
+        int right = n-1;
+        while(left<=right){
+            if((nums[left]&1) == 1){
+                left++;
+            }else{
+                swap(nums,left,right);
+                right--;
+            }
+        }
+        return nums;
+    }
+    private void swap(int[] nums,int i1,int i2){
+        if(i1!=i2){
+            int tmp = nums[i1];
+            nums[i1] = nums[i2];
+            nums[i2] = tmp;
+        }
+    }
 }

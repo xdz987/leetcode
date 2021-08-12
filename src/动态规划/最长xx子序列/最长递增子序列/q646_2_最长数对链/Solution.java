@@ -21,7 +21,7 @@ class Solution {
         });
         int n = pairs.length;
         int[] pre = pairs[0];
-        int res = 0;
+        int res = 1;
         for (int i = 1; i < n; i++) {
             if (pairs[i][0] > pre[1]) {
                 res++;

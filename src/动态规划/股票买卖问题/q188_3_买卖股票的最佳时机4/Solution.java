@@ -27,7 +27,26 @@ class Solution {
                 dp[j - 1] = Math.max(dp[j - 1], dp[j - 2] - prices[i]);
             }
         }
-
         return dp[k * 2];
+    }
+
+    // 未进行状态压缩
+    public int maxProfit2(int k, int[] prices) {
+        int n = prices.length;
+        if(n<=1)return 0;
+        int[][] dp = new int[k*2+1][n];
+        for(int i=1;i<=k*2;i+=2){
+            dp[i][0] = -prices[0];
+        }
+        for(int i=1;i<n;i++){
+            for(int j=1;j<=k*2;j++){
+                if((j&1)==1){
+                    dp[j][i] = Math.max(dp[j][i-1],dp[j-1][i-1]-prices[i]);
+                }else{
+                    dp[j][i] = Math.max(dp[j][i-1],prices[i]+dp[j-1][i-1]);
+                }
+            }
+        }
+        return dp[k*2][n-1];
     }
 }

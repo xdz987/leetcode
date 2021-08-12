@@ -135,4 +135,54 @@ class Solution {
         }
         return res;
     }
+
+    //三刷：3ms
+    public List<List<Integer>> fourSum3(int[] nums, int target) {
+        int n = nums.length;
+        List<List<Integer>> res = new ArrayList<>();
+        if(n<4) return res;
+        Arrays.sort(nums);
+        for(int left = 0;left<n-3;left++){
+            if(left>0 && nums[left] == nums[left-1]) continue;
+
+            int min = nums[left]+nums[left+1]+nums[left+2]+nums[left+3];
+            if(min>target) break;
+            int max = nums[left]+nums[n-3]+nums[n-2]+nums[n-1];
+            if(max<target) continue;
+
+            for(int midL = left+1;midL<n-2;midL++){
+                if(midL > left+1 && nums[midL] == nums[midL-1]) continue;
+
+                min = nums[left]+nums[midL]+nums[left+1]+nums[left+2];
+                if(min>target) break;
+                max = nums[left]+nums[midL]+nums[n-2]+nums[n-1];
+                if(max<target) continue;
+
+                int midR = midL+1;
+                int right = n-1;
+                while(midR<right){
+                    int sum = nums[left]+nums[midL]+nums[midR]+nums[right];
+                    if(sum == target){
+                        List<Integer> tmp = new ArrayList<>();
+                        tmp.add(nums[left]);
+                        tmp.add(nums[midL]);
+                        tmp.add(nums[midR]);
+                        tmp.add(nums[right]);
+                        res.add(tmp);
+                        while(midR>midL+1 && nums[midR] == nums[midR-1])
+                            midR++;
+                        while(right>midR && nums[right] == nums[right-1])
+                            right--;
+                        midR++;
+                        right--;
+                    }else if(sum>target){
+                        right--;
+                    }else{
+                        midR++;
+                    }
+                }
+            }
+        }
+        return res;
+    }
 }

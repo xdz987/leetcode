@@ -17,4 +17,16 @@ public class Solution2 {
 
         return newHead;
     }
+
+    //三刷
+    public ListNode swapPairs2(ListNode head) {
+        if(head ==null || head.next == null)
+            return head;
+
+        ListNode next = head.next;
+        head.next = swapPairs2(next.next);
+        next.next = head;
+
+        return next;
+    }
 }

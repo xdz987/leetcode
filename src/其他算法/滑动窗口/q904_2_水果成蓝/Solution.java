@@ -15,6 +15,32 @@ public class Solution {
  * 即求只包含两种元素的最长连续子序列
  */
 class TotalFruit {
+    //三刷：7ms
+    public int totalFruit3(int[] fruits) {
+        int n = fruits.length;
+        int[] window = new int[n];
+        int valid = 0;
+        int left = 0;
+        int right = 0;
+        int res = 0;
+        while(right<n){
+            window[fruits[right]]++;
+            if(window[fruits[right]] == 1){
+                valid++;
+            }
+            right++;
+            while(valid>2){
+                window[fruits[left]]--;
+                if(window[fruits[left]]==0){
+                    valid--;
+                }
+                left++;
+            }
+            res = Math.max(res,right-left);
+        }
+        return res;
+    }
+
     //HashMap版
     public int totalFruit(int[] tree) {
         //(1)初始化窗口指针Map、res

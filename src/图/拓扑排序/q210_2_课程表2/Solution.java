@@ -23,7 +23,7 @@ class Solution {
             adjacency.get(pre[1]).add(pre[0]);
         }
         for (int i = 0; i < numCourses; i++) {
-            if (!dfs(adjacency, flags, i)) return new int[]{};
+            if (flags[i]==0 && !dfs(adjacency, flags, i)) return new int[]{};
         }
         reverse(res);
         return res;
@@ -48,7 +48,7 @@ class Solution {
         if (flags[i] == 1) return false;
         flags[i] = 1;
         for (int j : adjacency.get(i)) {
-            if (!dfs(adjacency, flags, j)) return false;
+            if (flags[j]!=-1 && !dfs(adjacency, flags, j)) return false;
         }
         res[resI++] = i;
         flags[i] = -1;

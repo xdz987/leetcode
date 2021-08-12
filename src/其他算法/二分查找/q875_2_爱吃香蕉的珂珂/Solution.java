@@ -1,4 +1,4 @@
-package 其他算法.二分查找.q875_2_爱吃香蕉的珂珂;
+    package 其他算法.二分查找.q875_2_爱吃香蕉的珂珂;
 
 public class Solution {
     public static void main(String[] args) {
@@ -59,8 +59,10 @@ class MinEatingSpeed {
     //计算最大的一堆香蕉
     private int maxPile(int[] piles) {
         int max = piles[0];
-        for (int i = 1; i < piles.length; i++) {
-            max = Math.max(piles[i], max);
+        for(int i=1;i<piles.length;i++){
+            if(piles[i]>max){
+                max = piles[i];
+            }
         }
         return max;
     }

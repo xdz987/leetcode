@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 方法一：DP——完全背包
+ * 方法一：DP+HashSet
  * Java：90% 87%
  * 复杂度：O(N^2) O(N)
  */

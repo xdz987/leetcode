@@ -72,4 +72,25 @@ class MaxTurbulenceSize {
         }
         return res;
     }
+
+    //三刷：代码更可读
+    public int maxTurbulenceSize3(int[] arr) {
+        int n = arr.length;
+        int res = 0;
+        if (n == 1) return 1;
+        if (n >= 2) {
+            res = arr[0] == arr[1] ? 1 : 2;
+        }
+        int left = 0;
+        int right = 1;
+        while (right < n - 1) {
+            if (arr[right] > arr[right - 1] && arr[right] > arr[right + 1] || arr[right] < arr[right - 1] && arr[right] < arr[right + 1]) {
+                res = Math.max(res, right - left + 2);
+            } else {
+                left = right;
+            }
+            right++;
+        }
+        return res;
+    }
 }

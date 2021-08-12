@@ -25,7 +25,7 @@ class KthSmallest {
         while (left < right) {
             // 解决int越界问题如 2147483647+2147483646=-3
             int mid = left+((right-left)>>1);
-            int count = countNoMoreThanK(matrix,k,mid);
+            int count = countNoMoreThanK(matrix,mid);
             if(count>=k){
                 right = mid;
             }else{
@@ -35,7 +35,7 @@ class KthSmallest {
         return left;
     }
 
-    private int countNoMoreThanK(int[][] matrix,int k,int mid){
+    private int countNoMoreThanK(int[][] matrix,int mid){
         int count = 0;
         int y = matrix.length-1;
         for(int x=0;x<matrix.length;x++){

@@ -40,8 +40,7 @@ class ReverseList {
             return pre;
         ListNode next = head.next;
         head.next = pre;
-        ListNode last = reverseList(next,head);
-        return last;
+        return reverseList(next,head);
     }
 
     //迭代实现

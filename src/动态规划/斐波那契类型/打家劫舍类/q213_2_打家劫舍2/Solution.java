@@ -16,7 +16,6 @@ class Solution {
     //状态压缩
     public int robRange(int[] nums, int left, int right) {
         //(1)初始化dp，初始化第一、二间的最大价值
-        int[] dp = new int[nums.length];
         int ppre = nums[left];
         int pre = Math.max(nums[left], nums[left + 1]);
         int cur = pre;

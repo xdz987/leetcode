@@ -19,7 +19,7 @@ class Solution {
             //(3)如果除去手续费还能有利润才卖，但不一定是真正卖：
             //情况一，没有卖出：后面存在更高价格的股票，这里-fee后，后续就无需再扣一次手续费
             //情况二，卖出：后面没有更高价格的股票，而出现小于minPrice的股票，minPrice被重新赋值，相等于重新开始新一轮买卖股票
-            if (prices[i] - fee > minPrice) {
+            if (prices[i] - minPrice > fee) {
                 //(3.1)累加利润
                 res += prices[i] - minPrice - fee;
                 //(3.2)更新minPrice，用于判断后面是否有更高价格，没有更高价格该minPrice会被覆盖

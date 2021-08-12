@@ -23,7 +23,7 @@ public class Solution3 {
             int[] vs = graph[i];
             //(2.1)遍历顶点i的邻接顶点v
             for (int v : vs) {
-                //(2.2)还未联通就已经联通，说明交叉了，返回false
+                //(2.2)还未联通就已经联通，说明交叉/存在环了，返回false
                 if (isConnected(v, i))
                     return false;
                 //(2.3)将顶点进行联通

@@ -17,10 +17,10 @@ class MissingNumber {
         int right = nums.length;
         while (left < right) {
             int mid = left + ((right - left) >>> 1);
-            if (nums[mid] == mid) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
+            if(nums[mid]>mid){
+                right = mid;
+            }else{
+                left = mid+1;
             }
         }
 

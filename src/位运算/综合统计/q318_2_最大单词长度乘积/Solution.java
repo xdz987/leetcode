@@ -14,17 +14,10 @@ class Solution {
         int[] bitWords = new int[n];
         //(1)遍历每个word：将每个word对应的字符映射到bit上，如z为从右往左数第26位
         for (int i = 0; i < n; i++) {
-            String word = words[i];
-            //存放bit的32位整数容器
-            int bitWord = 0;
-            //(1.1)遍历每个字母，放入bitWord中
-            for (int j = 0; j < word.length(); j++) {
-                bitWord |= (1 << (word.charAt(j) - 'a'));
+            for(char c:words[i].toCharArray()){
+                bitWords[i] |= 1<<(c-'a');
             }
-            //(1.2)将bitWord放入bitWords数组中
-            bitWords[i] = bitWord;
         }
-
         int res = 0;
         //(2)暴力循环：当i与j对应的word进行"与运算"时，如果结果==0，则说明不存在相同字母
         for (int i = 0; i < n; i++) {

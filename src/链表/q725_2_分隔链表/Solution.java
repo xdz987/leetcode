@@ -78,4 +78,31 @@ class SplitListToParts {
         }
         return res;
     }
+
+    //三刷
+    public ListNode[] splitListToParts3(ListNode head, int k) {
+        ListNode[] res = new ListNode[k];
+        int resI = 0;
+        int n = 0;
+        ListNode cur = head;
+        while(cur!=null){
+            cur = cur.next;
+            n++;
+        }
+        int avg = n/k;
+        int surplus = n%k;
+        for(int i=0;i<k&&head!=null;i++){
+            int target = avg+(((surplus--)>0)?1:0);
+            ListNode pre = new ListNode(-1);
+            res[i] = head;
+            int count = 0;
+            while(head!=null && count<target){
+                pre = head;
+                head = head.next;
+                count++;
+            }
+            pre.next = null;
+        }
+        return res;
+    }
 }

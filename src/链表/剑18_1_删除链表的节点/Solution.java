@@ -30,4 +30,20 @@ class DeleteNode {
 
         return dummyNode.next;
     }
+
+    //三刷
+    public ListNode deleteNode2(ListNode head, int val) {
+        ListNode dummy = new ListNode(-1);
+        ListNode pre = dummy;
+        pre.next = head;
+        while(head!=null){
+            if(head.val == val){
+                pre.next = pre.next.next;
+                break;
+            }
+            pre = pre.next;
+            head = head.next;
+        }
+        return dummy.next;
+    }
 }

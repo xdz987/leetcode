@@ -20,14 +20,14 @@ class NumberOfSubarrays {
         int[] map = new int[n + 1];
         map[0] = 1;
         int res = 0;
-        int preSum = 0;
+        int preCount = 0;
         for (int num : nums) {
-            preSum += num & 1;
+            preCount += num & 1;
             //因为preSum-k作为数组下标
-            if (preSum - k >= 0) {
-                res += map[preSum - k];
+            if (preCount - k >= 0) {
+                res += map[preCount - k];
             }
-            map[preSum]++;
+            map[preCount]++;
         }
         return res;
     }

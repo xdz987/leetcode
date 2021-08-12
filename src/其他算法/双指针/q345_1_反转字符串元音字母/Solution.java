@@ -42,4 +42,29 @@ class ReverseVowels {
     private boolean isVowel(char c) {
         return c == 'a' || c == 'A' || c == 'e' || c == 'E' || c == 'i' || c == 'I' || c == 'o' || c == 'O' || c == 'U' || c == 'u';
     }
+
+    //三刷
+    public String reverseVowels3(String s) {
+        char[] sArr = s.toCharArray();
+        int left = 0;
+        int right = sArr.length-1;
+        while(left<right){
+            while(left < right && !isVowel(sArr[left])){
+                left++;
+            }
+            while(left<right && !isVowel(sArr[right])){
+                right--;
+            }
+            if(left<right){
+                char tmp = sArr[left];
+                sArr[left] = sArr[right];
+                sArr[right] = tmp;
+                left++;
+                right--;
+            }else{
+                break;
+            }
+        }
+        return new String(sArr);
+    }
 }

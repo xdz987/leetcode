@@ -17,6 +17,19 @@ class Solution {
         return farthest >= nums.length - 1;
     }
 
+    //三刷
+    public boolean canJump3(int[] nums) {
+        int n = nums.length;
+        if (n == 1) return true;
+        if (nums[0] == 0) return false;
+        int max = nums[0];
+        for (int i = 1; i < n - 1; i++) {
+            max = Math.max(max - 1, nums[i]);
+            if (max == 0) return false;
+        }
+        return true;
+    }
+
     //方式二：记录当前能够跳的步数
     public boolean cnaJump2(int[] nums) {
         if (nums.length == 0) return false;

@@ -45,7 +45,7 @@ class MapSum {
             if(cur.children[i]!=null){
                 res += fuzzySum(cur.children[i]);
             }
-        }
+        } 
         return res;
     }
 

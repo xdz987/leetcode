@@ -34,15 +34,14 @@ class Solution {
 
     private int partition(int[] nums, int left, int right) {
         swap(nums, left, (left + right) >>> 1);
-        int pivot = left;
         int index = left + 1;
-        for (int i = left; i <= right; i++) {
-            if (nums[i] < nums[pivot]) {
+        for (int i = index; i <= right; i++) {
+            if (nums[i] < nums[left]) {
                 swap(nums, i, index);
                 index++;
             }
         }
-        swap(nums, pivot, --index);
+        swap(nums, left, --index);
         return index;
     }
 
