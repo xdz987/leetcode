@@ -6,55 +6,41 @@
     
 ---
 - 今日签到题：
-    - 日期：8.15
-    - 题型：记忆化dfs/dp
+    - 日期：8.16
+    - 题型：回溯
     - 难度：中等
-    - 题号：q576
-    - 解题思路：记忆化dfs
-        - 记忆化：矩阵m*n的每个位置设立一个记忆化数组,该数组记录move从0道maxMove的出界路径数量
-        1. 初始化memo[i][j][move]每个位置的记忆化数组为-1，表示没有访问过
-            - 如不初始化而判断是否为0会导致无限递归
-        2. 返回(startRow,startColumn),maxMove的dfs递归
-        - 递归函数
-            1. 判断是否出界，是则返回1
-            2. 判断move是否为0，是则返回0（出不了界）
-            3. 判断memo是否存在(x,y,move)的记录，存在则返回
-            4. 初始化count为0
-            5. count累加遍历四个方向的dfs结果
-                - 需模运算(1e9+7)
-            6. 保存memo并返回
+    - 题号：526
+    - 解题思路：全排列+剪枝。在全排列的基础上增加一个剪枝：剪枝条件为不满足以下之一时跳过
+        - 第i位的数字能被i整除
+        - i能被第i位上的数字整除
 ```java
-public class Solution {
-    int[][][] memo;
-    int mod = (int)1e9+7;
-    public int findPaths(int m, int n, int maxMove, int startRow, int startColumn) {
-        memo = new int[m][n][maxMove+1];
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                for(int move = 0;move<=maxMove;move++){
-                    memo[i][j][move]=-1;
-                }
-            }
-        }
-        return dfs(m,n,maxMove,startRow,startColumn);
+/**
+ * 方法一：回溯
+ */
+class Solution {
+    int res = 0;
+    public int countArrangement(int n) {
+        boolean[] used = new boolean[n+1];
+        backTrack(used,n,1);
+        return res;
     }
 
-    private int dfs(int m, int n, int move, int row, int col){
-        if(row<0 || col<0 || row==m || col == n)
-            return 1;
-        if(move == 0)
-            return 0;
-        if(memo[row][col][move]!=-1){
-            return memo[row][col][move];
+    private void backTrack(boolean[] used,int n,int track){
+        if(track-1 == n){
+            res++;
         }
-        int count = 0;
-        count = (count+dfs(m,n,move-1,row+1,col))%mod;
-        count = (count+dfs(m,n,move-1,row,col+1))%mod;
-        count = (count+dfs(m,n,move-1,row-1,col))%mod;
-        count = (count+dfs(m,n,move-1,row,col-1))%mod;
-        memo[row][col][move] = count;
-
-        return count;
+        for(int i = 1;i<=n;i++){
+            if(used[i])
+                continue;
+            if(i%track != 0 && track%i !=0){
+                continue;
+            }
+            track++;
+            used[i] = true;
+            backTrack(used,n,track);
+            track--;
+            used[i] = false;
+        }
     }
 }
 ```
