@@ -6,41 +6,34 @@
     
 ---
 - 今日签到题：
-    - 日期：8.16
-    - 题型：回溯
-    - 难度：中等
-    - 题号：526
-    - 解题思路：全排列+剪枝。在全排列的基础上增加一个剪枝：剪枝条件为不满足以下之一时跳过
-        - 第i位的数字能被i整除
-        - i能被第i位上的数字整除
+    - 日期：8.17
+    - 题型：字符串一般题型
+    - 难度：简单
+    - 题号：551
+    - 解题思路：使用两个变量记录缺勤数或连续迟到记录
+        - 遍历字符串：
+            - 缺勤数>=2或连续迟到>=3时返回false
+            - 否则循环结束返回true
 ```java
-/**
- * 方法一：回溯
- */
 class Solution {
-    int res = 0;
-    public int countArrangement(int n) {
-        boolean[] used = new boolean[n+1];
-        backTrack(used,n,1);
-        return res;
-    }
-
-    private void backTrack(boolean[] used,int n,int track){
-        if(track-1 == n){
-            res++;
-        }
-        for(int i = 1;i<=n;i++){
-            if(used[i])
-                continue;
-            if(i%track != 0 && track%i !=0){
-                continue;
+    public boolean checkRecord(String s) {
+        char[] sArr = s.toCharArray();
+        int n = sArr.length;
+        int countA = 0;
+        int countL = 0;
+        for(int i=0;i<n;i++){
+            if(sArr[i] == 'L'){
+                countL++;
+            }else{
+                countL = 0;
             }
-            track++;
-            used[i] = true;
-            backTrack(used,n,track);
-            track--;
-            used[i] = false;
+            if(sArr[i] == 'A')
+                countA++;
+            if(countL>=3 || countA>=2){
+                return false;
+            }
         }
+        return true;
     }
 }
 ```
