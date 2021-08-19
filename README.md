@@ -6,59 +6,41 @@
     
 ---
 - 今日签到题：
-    - 日期：8.18
-    - 题型：dfs/dp
-    - 难度：困难
-    - 题号：552
-    - 解题思路：记忆化搜索
-        - dfs所有可能（排列树），但缺勤少于2天或连续迟到少于3天则剪枝
-            - 辅助理解：实际如出勤三天的排列元素为{A,L,L,L,P,P,P}，从树的角度来看即，树存在7层每个节点存在6个子节点，A>=2或P>=3时则进行树的剪枝
-        1. 初始化memo[2][3][n]
-        2. 返回dfs所有情况（n,days,A,L）
-            1. 当days==n说，说明达到叶子节点，计数器+1（即return 1）
-            2. 查找备忘录
-            3. 初始化计数器ans
-            4. ans累加dfs到场情况，取模1e9+7
-            5. ans累加dfs缺勤情况，取模1e9+7
-            6. ans累加dfs迟到情况，取模1e9+7
-            7. 保存备忘录
-            8. 返回ans
+    - 日期：8.19
+    - 题型：字符串
+    - 难度：简单
+    - 题号：345
+    - 解题思路：左右指针
+        - 当为不元音字母时跳过字符
+        - 当left和right都为元音字母时swap
 ```java
 class Solution {
-    final int MOD = (int)1e9+7;
-    int[][][] memo;
-    public int checkRecord(int n) {
-        memo = new int[2][3][n];
-        return dfs(n,0,0,0);
+    public String reverseVowels(String s) {
+        char[] sArr = s.toCharArray();
+        int left = 0;
+        int right = sArr.length-1;
+        while(left<right){
+            if(!isVowel(sArr[left])){
+                left++;
+                continue;
+            }
+            if(!isVowel(sArr[right])){
+                right--;
+                continue;
+            }
+            char tmp = sArr[left];
+            sArr[left] = sArr[right];
+            sArr[right] = tmp;
+            left++;
+            right--;
+        }
+        return new String(sArr);
     }
 
-    private int dfs(int n,int days,int A,int L){
-        //叶子节点：达到第n天，说明从root到叶子节点的情况行得通
-        if(days==n){
-            return 1;
-        }
-        //备忘录存在直接返回值
-        if(memo[A][L][days]!=0)
-            return memo[A][L][days];
-
-        int ans = 0;
-        //Present：没有限制，直接dfs所有可能
-        ans = (ans+dfs(n,days+1,A,0))%MOD;
-        //Absent：限制少于2天，dfs累计小于2的情况
-        if(A<1){
-            ans = (ans + dfs(n,days+1,A+1,0))%MOD;
-        }
-        //Absent：限制少于3天，dfs累计小于3的情况
-        if(L<2){
-            ans = (ans + dfs(n,days+1,A,L+1))%MOD;
-        }
-
-        //保存备忘录
-        memo[A][L][days] = ans;
-        return ans;
+    private boolean isVowel(char c){
+        return c == 'A' || c== 'a' || c== 'E'||c=='e'||c=='I'||c=='i'||c=='O'||c=='o'||c=='U'||c=='u';
     }
 }
-
 ```
 
 ### 数组与矩阵

@@ -49,21 +49,19 @@ class ReverseVowels {
         int left = 0;
         int right = sArr.length-1;
         while(left<right){
-            while(left < right && !isVowel(sArr[left])){
+            if(!isVowel(sArr[left])){
                 left++;
+                continue;
             }
-            while(left<right && !isVowel(sArr[right])){
+            if(!isVowel(sArr[right])){
                 right--;
+                continue;
             }
-            if(left<right){
-                char tmp = sArr[left];
-                sArr[left] = sArr[right];
-                sArr[right] = tmp;
-                left++;
-                right--;
-            }else{
-                break;
-            }
+            char tmp = sArr[left];
+            sArr[left] = sArr[right];
+            sArr[right] = tmp;
+            left++;
+            right--;
         }
         return new String(sArr);
     }
