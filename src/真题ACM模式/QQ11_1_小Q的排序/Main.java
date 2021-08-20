@@ -7,16 +7,9 @@ public class Main{
     public static void main(String[] args){
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
-        in.nextLine();
-        if(n <= 1){
-            System.out.println(0);
-            System.exit(0);
-        }
-        String s = in.nextLine();
-        String[] sArr = s.split(" ");
         int[] nums = new int[n];
-        for(int i=0;i<sArr.length;i++){
-            nums[i] = Integer.parseInt(sArr[i]);
+        for(int i=0;i<n;i++){
+            nums[i] = in.nextInt();
         }
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;

@@ -9,42 +9,25 @@
     - 日期：8.20
     - 题型：找规律
     - 难度：简单
-    - 题号：QQ11
-    - 解题思路：
-        - 题意：最多需要两次操作完成升序
-        1. 当数字数量<=1时，无需排序操作
-            - 直接返回0即可
-        2. 遍历数组，取min，max值
-        3. 当第一位为min值时，将后n-1个数排序即可
-            - 所以直接返回1
-        4. 当最后一位为max值时，将前n-1个数排序即可
-            - 所以直接返回1
+    - 题号：QQ10
+    - 解题思路：遍历元素，按照题目规则累加分数
+    
 ```java
-class Solution {
-    public String reverseVowels(String s) {
-        char[] sArr = s.toCharArray();
-        int left = 0;
-        int right = sArr.length-1;
-        while(left<right){
-            if(!isVowel(sArr[left])){
-                left++;
-                continue;
-            }
-            if(!isVowel(sArr[right])){
-                right--;
-                continue;
-            }
-            char tmp = sArr[left];
-            sArr[left] = sArr[right];
-            sArr[right] = tmp;
-            left++;
-            right--;
-        }
-        return new String(sArr);
-    }
+import java.util.Scanner;
+import java.util.Arrays;
 
-    private boolean isVowel(char c){
-        return c == 'A' || c== 'a' || c== 'E'||c=='e'||c=='I'||c=='i'||c=='O'||c=='o'||c=='U'||c=='u';
+public class Main {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int res = 0;
+        int heap = in.nextInt();
+        for (int i = 1; i < n; i++) {
+            int num = in.nextInt();
+            res += heap * num;
+            heap += num;
+        }
+        System.out.println(res);
     }
 }
 ```
