@@ -5,62 +5,49 @@
 - 后续更新：牛客真题+ACM模式
     
 ---
-- 今日签到题：
-    - 日期：8.21
-    - 题型：二叉树
+- 牛客真题+ACM模式：
+    - 日期：8.23
+    - 题型：动态规划
     - 难度：简单/中等
-    - 题号：KS2
-    - 解题思路：归并递归
-        - 原题：不需要前序条件
-            - 确定节点：curI=(left+right)>>1
-            - 确定范围：[left,curI-1],[curI+1,right]
-        - 改题：非满二叉树，元素不重复
-            - 看LC的前中序构建二叉树
+    - 题号：XM8
+    - 解题思路：LC279
     
 ```java
-/**
- * 原题解：不需要前序条件，直接根据满二叉树+中序条件，归并递归计算结果
- * 此改题：非满二叉树+元素不重复
- * 改题方法一：归并递归
- */
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
 public class Main{
-    static int[] res;
     public static void main(String[] args){
-        Scanner in = new Scanner(System.in);
-        String sPre = in.nextLine();
-        String sMid = in.nextLine();
-        String[] preArr = sPre.split(" ");
-        String[] midArr = sMid.split(" ");
-        int n = preArr.length;
-        int[] preNums = new int[n];
-        int[] midNums = new int[n];
-        res = new int[n];
-        for(int i=0;i<n;i++){
-            preNums[i] = Integer.parseInt(preArr[i]);
-            midNums[i] = Integer.parseInt(midArr[i]);
+        Scanner in=new Scanner(System.in);
+        String[] s = in.nextLine().replaceAll(","," ").split(" ");
+        int N = Integer.parseInt(s[0]);
+        int type = Integer.parseInt(s[1]);
+        int[] w = new int[type];
+        int[] v = new int[type];
+        for(int i=0;i<type;i++){
+            w[i] = Integer.parseInt(s[i+2]);
+            v[i] = Integer.parseInt(s[i+type+2]);
         }
-        traversal(preNums,0,n-1,midNums,0,n-1);
-        for(int i=0;i<n-1;i++)
-            System.out.print(res[i]+" ");
-        System.out.print(res[n-1]);
-    }
-    private static int traversal(int[] pre,int pLeft,int pRight,
-                                 int[] mid,int mLeft,int mRight){
-        if(mLeft==mRight){
-            return mid[mLeft];
+        //非状态压缩
+//        int[][] dp = new int[N+1][type+1];
+//        for(int weight = 1;weight<=N;weight++){
+//            for(int goods = 1;goods<=type;goods++){
+//                if(weight-w[goods-1]>=0)
+//                    dp[weight][goods] = Math.max(dp[weight][goods-1],
+//                            dp[weight-w[goods-1]][goods-1]+v[goods-1]);
+//            }
+//        }
+//        System.out.println(dp[N][type]);
+        //状态压缩
+        int[] dp = new int[N+1];
+        for(int goods = 0;goods<type;goods++){
+            for(int weight = N;weight>=1 && weight>=w[goods];weight--){
+                dp[weight] = Math.max(dp[weight],dp[weight-w[goods]]+v[goods]);
+            }
         }
-        int cur = pre[pLeft];
-        int lRange = 0;
-        for(int i=mLeft;i<=mRight;i++){
-            if(mid[i]!=cur) lRange++;
-            else break;
-        }
-        int childSum = traversal(pre,pLeft+1,pLeft+lRange,mid,mLeft,mLeft+lRange-1)
-                + traversal(pre,pLeft+lRange+1,pRight,mid,mLeft+lRange+1,mRight);
-        res[mLeft+lRange] = childSum;
-        return childSum+cur;
-        //pre [pLeft+1,pLeft+lRange] [pLeft+lRange+1,pRight]
-        //mid [mLeft,mLeft+lRange-1] [mLeft+lRange+1,mRight]
+        System.out.println(dp[N]);
     }
 }
 ```
