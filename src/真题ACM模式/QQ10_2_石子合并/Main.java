@@ -1,7 +1,6 @@
 package 真题ACM模式.QQ10_2_石子合并;
 
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class Main{
     public static void main(String[] args){

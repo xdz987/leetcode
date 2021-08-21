@@ -6,28 +6,61 @@
     
 ---
 - 今日签到题：
-    - 日期：8.20
-    - 题型：找规律
-    - 难度：简单
-    - 题号：QQ10
-    - 解题思路：遍历元素，按照题目规则累加分数
+    - 日期：8.21
+    - 题型：二叉树
+    - 难度：简单/中等
+    - 题号：KS2
+    - 解题思路：归并递归
+        - 原题：不需要前序条件
+            - 确定节点：curI=(left+right)>>1
+            - 确定范围：[left,curI-1],[curI+1,right]
+        - 改题：非满二叉树，元素不重复
+            - 看LC的前中序构建二叉树
     
 ```java
-import java.util.Scanner;
-import java.util.Arrays;
-
-public class Main {
-    public static void main(String[] args) {
+/**
+ * 原题解：不需要前序条件，直接根据满二叉树+中序条件，归并递归计算结果
+ * 此改题：非满二叉树+元素不重复
+ * 改题方法一：归并递归
+ */
+public class Main{
+    static int[] res;
+    public static void main(String[] args){
         Scanner in = new Scanner(System.in);
-        int n = in.nextInt();
-        int res = 0;
-        int heap = in.nextInt();
-        for (int i = 1; i < n; i++) {
-            int num = in.nextInt();
-            res += heap * num;
-            heap += num;
+        String sPre = in.nextLine();
+        String sMid = in.nextLine();
+        String[] preArr = sPre.split(" ");
+        String[] midArr = sMid.split(" ");
+        int n = preArr.length;
+        int[] preNums = new int[n];
+        int[] midNums = new int[n];
+        res = new int[n];
+        for(int i=0;i<n;i++){
+            preNums[i] = Integer.parseInt(preArr[i]);
+            midNums[i] = Integer.parseInt(midArr[i]);
         }
-        System.out.println(res);
+        traversal(preNums,0,n-1,midNums,0,n-1);
+        for(int i=0;i<n-1;i++)
+            System.out.print(res[i]+" ");
+        System.out.print(res[n-1]);
+    }
+    private static int traversal(int[] pre,int pLeft,int pRight,
+                                 int[] mid,int mLeft,int mRight){
+        if(mLeft==mRight){
+            return mid[mLeft];
+        }
+        int cur = pre[pLeft];
+        int lRange = 0;
+        for(int i=mLeft;i<=mRight;i++){
+            if(mid[i]!=cur) lRange++;
+            else break;
+        }
+        int childSum = traversal(pre,pLeft+1,pLeft+lRange,mid,mLeft,mLeft+lRange-1)
+                + traversal(pre,pLeft+lRange+1,pRight,mid,mLeft+lRange+1,mRight);
+        res[mLeft+lRange] = childSum;
+        return childSum+cur;
+        //pre [pLeft+1,pLeft+lRange] [pLeft+lRange+1,pRight]
+        //mid [mLeft,mLeft+lRange-1] [mLeft+lRange+1,mRight]
     }
 }
 ```
