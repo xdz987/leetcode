@@ -6,48 +6,77 @@
     
 ---
 - 牛客真题+ACM模式：
-    - 日期：8.24
-    - 题型：左右指针
-    - 难度：简单
-    - 题号：PDD12
-    - 解题思路：先排序，再求和左右元素，保存最大值最小值，最后输出最大值-最小值
-    
+    - 日期：8.25
+    - 题型：DFS/回溯
+    - 难度：中等
+    - 题号：XM13
+    - 解题思路：同力扣91
+        - 如题目求【变化数】可使用动态规划
+            - 当然也可以采用回溯/dfs，但只是计算变化数大材小用了，浪费时空
+        - 如记录【每种变化】则采用回溯/dfs
+
 ```java
-import java.util.Scanner;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
 
 public class Main{
-    public static void main(String[] args){
-        Scanner in=new Scanner(System.in);
-        String[] s = in.nextLine().replaceAll(","," ").split(" ");
-        int N = Integer.parseInt(s[0]);
-        int type = Integer.parseInt(s[1]);
-        int[] w = new int[type];
-        int[] v = new int[type];
-        for(int i=0;i<type;i++){
-            w[i] = Integer.parseInt(s[i+2]);
-            v[i] = Integer.parseInt(s[i+type+2]);
+    final static char[] RECORD = new char[]{
+            ' ','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p',
+            'q','r','s','t','u','v','w','x','y','z'
+    };
+    static StringBuilder res;
+    public static void main(String[] args) throws IOException{
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        while(bf.ready()){
+            String number = bf.readLine();
+            res = new StringBuilder();
+            dfs(number.toCharArray(),0,new StringBuilder(),false);
+            System.out.println(res.toString().trim());
         }
-        //非状态压缩
-//        int[][] dp = new int[N+1][type+1];
-//        for(int weight = 1;weight<=N;weight++){
-//            for(int goods = 1;goods<=type;goods++){
-//                if(weight-w[goods-1]>=0)
-//                    dp[weight][goods] = Math.max(dp[weight][goods-1],
-//                            dp[weight-w[goods-1]][goods-1]+v[goods-1]);
-//            }
-//        }
-//        System.out.println(dp[N][type]);
-        //状态压缩
-        int[] dp = new int[N+1];
-        for(int goods = 0;goods<type;goods++){
-            for(int weight = N;weight>=1 && weight>=w[goods];weight--){
-                dp[weight] = Math.max(dp[weight],dp[weight-w[goods]]+v[goods]);
+    }
+    //flag：标志前一个转换的字母是否大于9
+    //传递start作为下标
+    private static void dfs(char[] sArr,int start,StringBuilder track,boolean flag){
+        if(start == sArr.length){
+            res.append(track.toString());
+            res.append(" ");
+            return;
+        }
+        if(sArr[start]>'0' && sArr[start]<='9'){
+            dfs(sArr,start+1,new StringBuilder(track).append(RECORD[sArr[start]-'0']),false);
+        }
+        //前一个字母由<=9组成才可与当前字母组合
+        if(!flag && start>0 && (sArr[start-1] == '1' || (sArr[start-1] == '2' && sArr[start]<='6'))){
+            StringBuilder copy = new StringBuilder(track);
+            copy.deleteCharAt(copy.length()-1);
+            int RIndex = (sArr[start-1]-'0')*10+(sArr[start]-'0');
+            copy.append(RECORD[RIndex]);
+            dfs(sArr,start+1,copy,true);
+        }
+    }
+}
+```
+```java
+class Solution {
+    public int numDecodings(String s) {
+        char[] sArr = s.toCharArray();
+        int n = sArr.length;
+        if(sArr[0] == '0') return 0;
+        if(n==1)return 1;
+        int[] dp = new int[n+1];
+        dp[0] = 1;
+        for(int i=1;i<=n;i++){
+            if(sArr[i-1] != '0'){
+                dp[i] += dp[i-1];
+            }
+            if(i>1 && sArr[i-2]!='0' && (sArr[i-2]=='1' || (sArr[i-2]=='2' && sArr[i-1] <= '6'))){
+                dp[i] += dp[i-2];
             }
         }
-        System.out.println(dp[N]);
+        return dp[n];
     }
 }
 ```
