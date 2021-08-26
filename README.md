@@ -45,10 +45,12 @@ public class Main{
             res.append(" ");
             return;
         }
+        //情况一：由单个数字组成字母
         if(sArr[start]>'0' && sArr[start]<='9'){
             dfs(sArr,start+1,new StringBuilder(track).append(RECORD[sArr[start]-'0']),false);
         }
-        //前一个字母由<=9组成才可与当前字母组合
+        //情况二：由两个数字组成字母
+        //PS：前一个字母由<=9组成才可与当前字母组合
         if(!flag && start>0 && (sArr[start-1] == '1' || (sArr[start-1] == '2' && sArr[start]<='6'))){
             StringBuilder copy = new StringBuilder(track);
             copy.deleteCharAt(copy.length()-1);
