@@ -7,7 +7,6 @@ import java.util.Arrays;
 
 /**
  * 同LC300，但DP复杂度O(n^2)会超时，必须采用二分法降到(OlogN)
- *
  */
 public class Main{
     public static void main(String[] args) throws IOException{
