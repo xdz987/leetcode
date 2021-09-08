@@ -1,4 +1,4 @@
-package 周赛.周赛20200906.q5863_1_特殊的四元组;
+package 周赛.周赛20210906.q5863_1_特殊的四元组;
 
 class Solution {
     public int countQuadruplets(int[] nums) {

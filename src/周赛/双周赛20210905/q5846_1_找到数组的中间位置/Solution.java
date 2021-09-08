@@ -1,4 +1,4 @@
-package 周赛.双周赛20200905.q5846_1_找到数组的中间位置;
+package 周赛.双周赛20210905.q5846_1_找到数组的中间位置;
 
 class Solution {
     public int findMiddleIndex(int[] nums) {

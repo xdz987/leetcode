@@ -1,4 +1,4 @@
-package 周赛.周赛20200906.q5864_2_游戏中弱角色的数量;
+package 周赛.周赛20210906.q5864_2_游戏中弱角色的数量;
 
 import java.util.Arrays;
 

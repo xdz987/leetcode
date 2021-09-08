@@ -1,4 +1,4 @@
-package 周赛.周赛20200906.q5865_2_访问完所有房间的第一天;
+package 周赛.周赛20210906.q5865_2_访问完所有房间的第一天;
 
 class OverTime {
     private static final int MOD = 1000000007;
